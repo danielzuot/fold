@@ -64,8 +64,10 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
 
     // Check out the discovered peripherals to find Sensor Tag
     func centralManager(central: CBCentralManager, didDiscoverPeripheral peripheral: CBPeripheral, advertisementData: [String : AnyObject], RSSI: NSNumber) {
+        if let peripheralName = peripheral.name {
+            NSLog("Discovered %@ at %@", peripheralName, RSSI);
+        }
         
-        NSLog("Discovered %@ at %@", peripheral.name!, RSSI);
         
         if (vendorPeripheral != peripheral) {
             //Save a local copy of the peripheral, so CB doesn't get rid of it
@@ -114,7 +116,7 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
             cleanup()
             return
         }
-        
+        NSLog("Discovered correct service")
         for service in peripheral.services! {
             peripheral.discoverCharacteristics([testCharacteristicUUID], forService: service)
         }

@@ -56,6 +56,7 @@ class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextVie
             NSLog("Creating service/characteristic tree...")
             self.testCharacteristic = CBMutableCharacteristic(type: testCharacteristicUUID, properties: CBCharacteristicProperties.Notify, value: nil, permissions: CBAttributePermissions.Readable)
             let testService = CBMutableService(type: testServiceUUID, primary: true)
+            testService.characteristics = [self.testCharacteristic]
             peripheralManager.addService(testService)
         }
     }
