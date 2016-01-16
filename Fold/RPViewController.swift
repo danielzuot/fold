@@ -26,6 +26,11 @@ class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextVie
         // Do any additional setup after loading the view.
         peripheralManager = CBPeripheralManager(delegate: self, queue: nil)
     }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        peripheralManager.stopAdvertising()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
