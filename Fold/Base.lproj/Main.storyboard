@@ -264,6 +264,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Request Payment" id="gsa-Bp-Qkf"/>
+                    <connections>
+                        <outlet property="amountRequested" destination="pfc-GH-Gm5" id="QTv-z9-82a"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QXe-e8-luM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

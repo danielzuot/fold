@@ -11,6 +11,7 @@ import CoreBluetooth
 
 class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextViewDelegate {
 
+    @IBOutlet weak var amountRequested: UITextField!
     //constants
     let testServiceUUID = CBUUID(string: "56054B44-6C60-4D42-BAB3-7D1AB28498C6")
     let testCharacteristicUUID = CBUUID(string: "54D6C478-5008-4F9B-8DEB-D28A4E62AADB")
@@ -43,6 +44,7 @@ class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextVie
             return
         } else {
             //TODO change initial value to value in text field
+            
             self.testCharacteristic = CBMutableCharacteristic(type: testCharacteristicUUID, properties: CBCharacteristicProperties.Notify, value: nil, permissions: CBAttributePermissions.Readable)
             let testService = CBMutableService(type: testServiceUUID, primary: true)
             peripheralManager.addService(testService)
@@ -50,7 +52,8 @@ class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextVie
     }
     
     func peripheralManager(peripheral: CBPeripheralManager, central: CBCentral, didSubscribeToCharacteristic characteristic: CBCharacteristic) {
-        
+        let amountReqData = (amountRequested.text! as NSString).dataUsingEncoding(NSUTF8StringEncoding)
+        peripheralManager.updateValue(amountReqData!, forCharacteristic: self.testCharacteristic, onSubscribedCentrals: nil)
     }
     
     

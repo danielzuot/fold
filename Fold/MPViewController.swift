@@ -74,10 +74,6 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
             //And then connect
             NSLog("Connecting to peripheral %@", peripheral);
             self.centralManager.connectPeripheral(peripheral, options: nil)
-            
-        }
-        else {
-            self.statusLabel.text = "Fold Vendor NOT Found"
         }
     }
     
@@ -147,6 +143,7 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
         
         if (dataString != "") {
             self.amountLabel.text = dataString
+            NSLog("Got data, disconnecting from peripheral...")
             peripheral.setNotifyValue(false, forCharacteristic: characteristic)
             centralManager.cancelPeripheralConnection(peripheral)
         }
