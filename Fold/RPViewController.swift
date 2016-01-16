@@ -33,6 +33,7 @@ class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextVie
     }
     
     @IBAction func broadcastTapped(sender: AnyObject) {
+        NSLog("Starting to broadcast...")
         peripheralManager.startAdvertising([CBAdvertisementDataServiceUUIDsKey : testServiceUUID])
     }
     
@@ -44,7 +45,7 @@ class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextVie
             return
         } else {
             //TODO change initial value to value in text field
-            
+            NSLog("Creating service/characteristic tree...")
             self.testCharacteristic = CBMutableCharacteristic(type: testCharacteristicUUID, properties: CBCharacteristicProperties.Notify, value: nil, permissions: CBAttributePermissions.Readable)
             let testService = CBMutableService(type: testServiceUUID, primary: true)
             peripheralManager.addService(testService)
@@ -52,6 +53,13 @@ class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextVie
     }
     
     func peripheralManager(peripheral: CBPeripheralManager, central: CBCentral, didSubscribeToCharacteristic characteristic: CBCharacteristic) {
+        NSLog("User has subscribed, updating amount requested value...")
+        let amountReqData = (amountRequested.text! as NSString).dataUsingEncoding(NSUTF8StringEncoding)
+        peripheralManager.updateValue(amountReqData!, forCharacteristic: self.testCharacteristic, onSubscribedCentrals: nil)
+    }
+    
+    func peripheralManagerIsReadyToUpdateSubscribers(peripheral: CBPeripheralManager) {
+        NSLog("Vendor ready to update again, updating amount requested value...")
         let amountReqData = (amountRequested.text! as NSString).dataUsingEncoding(NSUTF8StringEncoding)
         peripheralManager.updateValue(amountReqData!, forCharacteristic: self.testCharacteristic, onSubscribedCentrals: nil)
     }
