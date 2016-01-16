@@ -29,6 +29,7 @@ class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextVie
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
+        NSLog("Broadcast stopped.")
         peripheralManager.stopAdvertising()
     }
 
@@ -40,6 +41,12 @@ class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextVie
     @IBAction func broadcastTapped(sender: AnyObject) {
         NSLog("Starting to broadcast...")
         peripheralManager.startAdvertising([CBAdvertisementDataServiceUUIDsKey : testServiceUUID])
+    }
+    
+    @IBAction func requestedAmountUpdated(sender: AnyObject) {
+        NSLog("Requested value changed, updating subscribers...")
+        let amountReqData = (amountRequested.text! as NSString).dataUsingEncoding(NSUTF8StringEncoding)
+        peripheralManager.updateValue(amountReqData!, forCharacteristic: self.testCharacteristic, onSubscribedCentrals: nil)
     }
     
     /******* CBPeripheralManagerDelegate *******/
@@ -71,13 +78,6 @@ class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextVie
         let amountReqData = (amountRequested.text! as NSString).dataUsingEncoding(NSUTF8StringEncoding)
         peripheralManager.updateValue(amountReqData!, forCharacteristic: self.testCharacteristic, onSubscribedCentrals: nil)
     }
-    
-    func peripheralManagerIsReadyToUpdateSubscribers(peripheral: CBPeripheralManager) {
-        NSLog("Vendor ready to update again, updating amount requested value...")
-        let amountReqData = (amountRequested.text! as NSString).dataUsingEncoding(NSUTF8StringEncoding)
-        peripheralManager.updateValue(amountReqData!, forCharacteristic: self.testCharacteristic, onSubscribedCentrals: nil)
-    }
-    
     
     /*
     // MARK: - Navigation
