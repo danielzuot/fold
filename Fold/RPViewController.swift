@@ -39,6 +39,14 @@ class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextVie
     
     /******* CBPeripheralManagerDelegate *******/
     
+    func peripheralManager(peripheral: CBPeripheralManager, didAddService service: CBService, error: NSError?) {
+        if (error != nil) {
+            NSLog("Error publishing service: %@", error!)
+        }
+        
+        NSLog("Service has been published to database.")
+    }
+    
     func peripheralManagerDidUpdateState(peripheral: CBPeripheralManager) {
         if peripheral.state != CBPeripheralManagerState.PoweredOn {
             NSLog("Bluetooth switched off or not initialized")
