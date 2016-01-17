@@ -82,6 +82,11 @@ class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextVie
             }
             testService.characteristics = [self.testCharacteristic]
             peripheralManager.addService(testService)
+            
+            delay(5.0){
+                
+            }
+            peripheralManager.startAdvertising([CBAdvertisementDataServiceUUIDsKey : testServiceUUID])
         }
     }
     
