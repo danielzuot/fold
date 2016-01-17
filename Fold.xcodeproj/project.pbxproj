@@ -172,7 +172,7 @@
 				TargetAttributes = {
 					8D9171231C446297008D8507 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = V982QTRSN7;
+						DevelopmentTeam = W97E5V9FW6;
 					};
 					8D9171371C446298008D8507 = {
 						CreatedOnToolsVersion = 7.2;
@@ -355,8 +355,9 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Fold/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.fold;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fold2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -369,8 +370,9 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Fold/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.fold;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fold2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
