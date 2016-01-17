@@ -27,15 +27,6 @@ class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextVie
         peripheralManager = CBPeripheralManager(delegate: self, queue: nil)
     }
     
-    func delay(delay:Double, closure:()->()) {
-        dispatch_after(
-            dispatch_time(
-                DISPATCH_TIME_NOW,
-                Int64(delay * Double(NSEC_PER_SEC))
-            ),
-            dispatch_get_main_queue(), closure)
-    }
-    
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         NSLog("Broadcast stopped.")
@@ -77,16 +68,8 @@ class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextVie
             NSLog("Creating service/characteristic tree...")
             self.testCharacteristic = CBMutableCharacteristic(type: testCharacteristicUUID, properties: CBCharacteristicProperties.Notify, value: nil, permissions: CBAttributePermissions.Readable)
             let testService = CBMutableService(type: testServiceUUID, primary: true)
-            delay(1.0){
-        
-            }
             testService.characteristics = [self.testCharacteristic]
             peripheralManager.addService(testService)
-            
-            delay(5.0){
-                
-            }
-            peripheralManager.startAdvertising([CBAdvertisementDataServiceUUIDsKey : testServiceUUID])
         }
     }
     
