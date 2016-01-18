@@ -16,8 +16,8 @@ class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextVie
     
     
     //globals
-    var peripheralManager : CBPeripheralManager!
-    var testCharacteristic : CBMutableCharacteristic!
+    var peripheralManager : CBPeripheralManager?
+    var testCharacteristic : CBMutableCharacteristic?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +27,7 @@ class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextVie
         broadcastingSwitch.addTarget(self, action: Selector("stateChanged:"), forControlEvents: UIControlEvents.ValueChanged)
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewDidDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
     }
 
@@ -39,10 +39,10 @@ class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextVie
     func stateChanged(switchState: UISwitch) {
         if switchState.on {
             NSLog("Starting to broadcast...")
-            peripheralManager.startAdvertising([CBAdvertisementDataServiceUUIDsKey : serviceUUID])
+            peripheralManager!.startAdvertising([CBAdvertisementDataServiceUUIDsKey : serviceUUID])
         } else {
             NSLog("Stopping broadcast...")
-            peripheralManager.stopAdvertising()
+            peripheralManager?.stopAdvertising()
         }
     }
     
@@ -50,7 +50,7 @@ class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextVie
     @IBAction func requestedAmountUpdated(sender: AnyObject) {
         NSLog("Requested value changed, updating subscribers...")
         let amountReqData = (amountRequested.text! as NSString).dataUsingEncoding(NSUTF8StringEncoding)
-        peripheralManager.updateValue(amountReqData!, forCharacteristic: self.testCharacteristic, onSubscribedCentrals: nil)
+        peripheralManager!.updateValue(amountReqData!, forCharacteristic: self.testCharacteristic!, onSubscribedCentrals: nil)
     }
     
     /******* CBPeripheralManagerDelegate *******/
@@ -71,18 +71,32 @@ class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextVie
         //TODO change initial value to value in text field
         NSLog("Creating service/characteristic tree...")
         
-        self.testCharacteristic = CBMutableCharacteristic(type: characteristicUUID, properties: CBCharacteristicProperties.Notify, value: nil, permissions: CBAttributePermissions.Readable)
-        let testService = CBMutableService(type: serviceUUID, primary: true)
+        self.testCharacteristic = CBMutableCharacteristic(
+            type: characteristicUUID,
+            properties: CBCharacteristicProperties.Notify,
+            value: nil,
+            permissions: CBAttributePermissions.Readable
+        )
         
-        testService.characteristics = [self.testCharacteristic]
-        peripheralManager.addService(testService)
+        let testService = CBMutableService(
+            type: serviceUUID,
+            primary: true
+        )
+        
+        testService.characteristics = [self.testCharacteristic!]
+        peripheralManager!.addService(testService)
         
     }
     
     func peripheralManager(peripheral: CBPeripheralManager, central: CBCentral, didSubscribeToCharacteristic characteristic: CBCharacteristic) {
         NSLog("User has subscribed, updating amount requested value...")
+        
         let amountReqData = (amountRequested.text! as NSString).dataUsingEncoding(NSUTF8StringEncoding)
-        peripheralManager.updateValue(amountReqData!, forCharacteristic: self.testCharacteristic, onSubscribedCentrals: nil)
+        peripheralManager!.updateValue(
+            amountReqData!,
+            forCharacteristic: self.testCharacteristic!,
+            onSubscribedCentrals: nil
+        )
     }
     
     func peripheralManager(peripheral: CBPeripheralManager, central: CBCentral, didUnsubscribeFromCharacteristic characteristic: CBCharacteristic) {

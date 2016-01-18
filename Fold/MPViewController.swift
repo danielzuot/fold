@@ -16,8 +16,8 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
     @IBOutlet weak var statusLabel: UILabel!
     
     //globals
-    var centralManager : CBCentralManager!
-    var vendorPeripheral : CBPeripheral!
+    var centralManager : CBCentralManager?
+    var vendorPeripheral : CBPeripheral?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +29,7 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
 
     override func viewWillDisappear(animated: Bool) {
         NSLog("Leaving view and stopping scan...")
-        centralManager.stopScan()
+        centralManager?.stopScan()
         super.viewWillDisappear(animated)
     }
     
@@ -38,17 +38,13 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func searchDevices(sender: AnyObject) {
-        NSLog("hello world")
-    }
-    
      /******* CBCentralManagerDelegate *******/
     
     // Check status of BLE hardware
     func centralManagerDidUpdateState(central: CBCentralManager) {
         if central.state == CBCentralManagerState.PoweredOn {
             // Scan for peripherals if BLE is turned on
-            central.scanForPeripheralsWithServices([serviceUUID], options: [CBCentralManagerScanOptionAllowDuplicatesKey : true])
+            centralManager?.scanForPeripheralsWithServices([serviceUUID], options: [CBCentralManagerScanOptionAllowDuplicatesKey : true])
             //central.scanForPeripheralsWithServices(nil, options: nil)
             NSLog("Starting scan...")
             self.statusLabel.text = "Searching for Fold Vendors"
@@ -60,9 +56,8 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
     }
 
     func centralManager(central: CBCentralManager, didDiscoverPeripheral peripheral: CBPeripheral, advertisementData: [String : AnyObject], RSSI: NSNumber) {
-        if let peripheralName = peripheral.name {
-            NSLog("Discovered %@ at %@", peripheralName, RSSI);
-        }
+        
+        print("Discovered \(peripheral.name) at \(RSSI)")
         
         // Reject any where the value is above reasonable range
         if (RSSI.integerValue > -15) {
@@ -76,13 +71,13 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
             return;
         }
         
-        if (self.vendorPeripheral != peripheral) {
+        if (vendorPeripheral != peripheral) {
             //Save a local copy of the peripheral, so CB doesn't get rid of it
-            self.vendorPeripheral = peripheral
+            vendorPeripheral = peripheral
             
             //And then connect
             NSLog("Connecting to peripheral %@", peripheral);
-            self.centralManager.connectPeripheral(peripheral, options: nil)
+            centralManager?.connectPeripheral(peripheral, options: nil)
         }
     }
     
@@ -95,54 +90,59 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
     func cleanup() {
         NSLog("Cleaning up...")
         // Don't do anything if we're not connected
-        if (self.vendorPeripheral.state != CBPeripheralState.Connected) {
+        if (self.vendorPeripheral?.state != CBPeripheralState.Connected) {
             return;
         }
         
         // See if we are subscribed to a characteristic on the peripheral
-        if let peripheralServices = vendorPeripheral.services {
+        if let peripheralServices = vendorPeripheral?.services as [CBService]?{
             for service in peripheralServices {
-                if let serviceCharacteristics = service.characteristics {
+                if let serviceCharacteristics = service.characteristics as [CBCharacteristic]? {
                     for charac in serviceCharacteristics {
-                        if (charac.isNotifying){
-                            vendorPeripheral.setNotifyValue(false, forCharacteristic: charac)
+                        if charac.UUID.isEqual(characteristicUUID) && charac.isNotifying {
+                            vendorPeripheral?.setNotifyValue(false, forCharacteristic: charac)
+                            // And we're done.
                             return
                         }
                     }
                 }
             }
         }
-        centralManager.cancelPeripheralConnection(vendorPeripheral)
+        centralManager?.cancelPeripheralConnection(vendorPeripheral!)
     }
     
     func centralManager(central: CBCentralManager, didConnectPeripheral peripheral: CBPeripheral) {
         NSLog("Connected to vendor")
         self.statusLabel.text = "Connected to vendor."
         
-        centralManager.stopScan()
+        centralManager?.stopScan()
+        NSLog("Scanning stopped.")
         peripheral.delegate = self
         peripheral.discoverServices([serviceUUID])
     }
     
     func peripheral(peripheral: CBPeripheral, didDiscoverServices error: NSError?) {
-        if (error == nil) {
+        if let error = error {
+            print("Error discovering services: \(error.localizedDescription)")
             cleanup()
             return
         }
+        
         NSLog("Discovered correct service")
-        for service in peripheral.services! {
-            peripheral.discoverCharacteristics([serviceUUID], forService: service)
+        for service in peripheral.services as [CBService]! {
+            peripheral.discoverCharacteristics([characteristicUUID], forService: service)
         }
     }
     
     func peripheral(peripheral: CBPeripheral, didDiscoverCharacteristicsForService service: CBService, error: NSError?) {
-        if (error == nil) {
+        if let error = error {
+            print("Error discovering services: \(error.localizedDescription)")
             cleanup()
             return
         }
         
         NSLog("Searching service %@ for characteristic with UUID %@...", service, CHARACTERISTIC_UUID)
-        for character in service.characteristics! {
+        for character in service.characteristics as [CBCharacteristic]! {
             NSLog("Found characteristic with UUID: %@", character.UUID)
             if (character.UUID.isEqual(characteristicUUID)){
                 NSLog("It's the right characteristic!")
@@ -153,8 +153,8 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
     }
     
     func peripheral(peripheral: CBPeripheral, didUpdateValueForCharacteristic characteristic: CBCharacteristic, error: NSError?) {
-        if (error == nil) {
-            NSLog("Error!")
+        if let error = error {
+            print("Error discovering services: \(error.localizedDescription)")
             return
         }
         
@@ -164,7 +164,7 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
             self.amountLabel.text = dataString
             NSLog("Got data, disconnecting from peripheral...")
             peripheral.setNotifyValue(false, forCharacteristic: characteristic)
-            centralManager.cancelPeripheralConnection(peripheral)
+            centralManager?.cancelPeripheralConnection(peripheral)
         }
     }
     
@@ -177,13 +177,13 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
         } else {
             // notification has stopped
             NSLog("Notification stopped on %@.  Disconnecting", characteristic);
-            centralManager.cancelPeripheralConnection(peripheral)
+            centralManager?.cancelPeripheralConnection(peripheral)
         }
     }
     
     func centralManager(central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: NSError?) {
         self.vendorPeripheral = nil
-        centralManager.scanForPeripheralsWithServices([serviceUUID], options: nil)
+        centralManager?.scanForPeripheralsWithServices([serviceUUID], options: nil)
     }
     
     /*
