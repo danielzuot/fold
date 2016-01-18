@@ -48,8 +48,8 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
     func centralManagerDidUpdateState(central: CBCentralManager) {
         if central.state == CBCentralManagerState.PoweredOn {
             // Scan for peripherals if BLE is turned on
-            central.scanForPeripheralsWithServices([CBUUID(string: testServiceUUID)], options: [CBCentralManagerScanOptionAllowDuplicatesKey : true])
-            //central.scanForPeripheralsWithServices(nil, options: nil)
+            //central.scanForPeripheralsWithServices([CBUUID(string: testServiceUUID)], options: [CBCentralManagerScanOptionAllowDuplicatesKey : true])
+            central.scanForPeripheralsWithServices(nil, options: nil)
             NSLog("Starting scan...")
             self.statusLabel.text = "Searching for Fold Vendors"
         }
@@ -83,7 +83,7 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
             
             //And then connect
             NSLog("Connecting to peripheral %@", peripheral);
-            self.centralManager.connectPeripheral(peripheral, options: nil)
+            //self.centralManager.connectPeripheral(peripheral, options: nil)
         }
     }
     
