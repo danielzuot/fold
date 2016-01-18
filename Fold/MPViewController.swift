@@ -59,7 +59,6 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
         }
     }
 
-    // Check out the discovered peripherals to find Sensor Tag
     func centralManager(central: CBCentralManager, didDiscoverPeripheral peripheral: CBPeripheral, advertisementData: [String : AnyObject], RSSI: NSNumber) {
         if let peripheralName = peripheral.name {
             NSLog("Discovered %@ at %@", peripheralName, RSSI);
@@ -67,13 +66,13 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
         
         // Reject any where the value is above reasonable range
         if (RSSI.integerValue > -15) {
-            NSLog("RSSI of %@ is above reasonable range.", RSSI.integerValue);
+            NSLog("RSSI of %i is above reasonable range.", RSSI.integerValue);
             return;
         }
         
         // Reject if the signal strength is too low to be close enough (Close is around -22dB)
         if (RSSI.integerValue < -35) {
-            NSLog("RSSI of %@ is too low to be close enough.", RSSI.integerValue);
+            NSLog("RSSI of %i is too low to be close enough.", RSSI.integerValue);
             return;
         }
         

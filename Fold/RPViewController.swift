@@ -12,6 +12,8 @@ import CoreBluetooth
 class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextViewDelegate {
 
     @IBOutlet weak var amountRequested: UITextField!
+    @IBOutlet weak var broadcastingSwitch: UISwitch!
+    
     
     //globals
     var peripheralManager : CBPeripheralManager!
@@ -22,11 +24,10 @@ class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextVie
 
         // Do any additional setup after loading the view.
         peripheralManager = CBPeripheralManager(delegate: self, queue: nil)
+        broadcastingSwitch.addTarget(self, action: Selector("stateChanged:"), forControlEvents: UIControlEvents.ValueChanged)
     }
     
     override func viewWillDisappear(animated: Bool) {
-        NSLog("Broadcast stopped.")
-        peripheralManager.stopAdvertising()
         super.viewWillDisappear(animated)
     }
 
@@ -35,10 +36,16 @@ class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextVie
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func broadcastTapped(sender: AnyObject) {
-        NSLog("Starting to broadcast...")
-        peripheralManager.startAdvertising([CBAdvertisementDataServiceUUIDsKey : CBUUID(string: testServiceUUID)])
+    func stateChanged(switchState: UISwitch) {
+        if switchState.on {
+            NSLog("Starting to broadcast...")
+            peripheralManager.startAdvertising([CBAdvertisementDataServiceUUIDsKey : CBUUID(string: testServiceUUID)])
+        } else {
+            NSLog("Stopping broadcast...")
+            peripheralManager.stopAdvertising()
+        }
     }
+    
     
     @IBAction func requestedAmountUpdated(sender: AnyObject) {
         NSLog("Requested value changed, updating subscribers...")
