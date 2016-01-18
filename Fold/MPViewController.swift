@@ -11,10 +11,6 @@ import CoreBluetooth
 
 class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDelegate {
     
-    //constants
-    let testServiceUUID = CBUUID(string: "56054B44-6C60-4D42-BAB3-7D1AB28498C6")
-    let testCharacteristicUUID = CBUUID(string: "54D6C478-5008-4F9B-8DEB-D28A4E62AADB")
-    
     //IBOutlets
     @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
@@ -32,9 +28,9 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
     }
 
     override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
         NSLog("Leaving view and stopping scan...")
         centralManager.stopScan()
+        super.viewWillDisappear(animated)
     }
     
     override func didReceiveMemoryWarning() {
@@ -52,8 +48,8 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
     func centralManagerDidUpdateState(central: CBCentralManager) {
         if central.state == CBCentralManagerState.PoweredOn {
             // Scan for peripherals if BLE is turned on
-            //central.scanForPeripheralsWithServices([testServiceUUID], options: [CBCentralManagerScanOptionAllowDuplicatesKey : true])
-            central.scanForPeripheralsWithServices(nil, options: nil)
+            central.scanForPeripheralsWithServices([CBUUID(string: testServiceUUID)], options: [CBCentralManagerScanOptionAllowDuplicatesKey : true])
+            //central.scanForPeripheralsWithServices(nil, options: nil)
             NSLog("Starting scan...")
             self.statusLabel.text = "Searching for Fold Vendors"
         }
@@ -69,15 +65,26 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
             NSLog("Discovered %@ at %@", peripheralName, RSSI);
         }
         
+        // Reject any where the value is above reasonable range
+        if (RSSI.integerValue > -15) {
+            NSLog("RSSI of %@ is above reasonable range.", RSSI.integerValue);
+            return;
+        }
         
-        /*if (vendorPeripheral != peripheral) {
+        // Reject if the signal strength is too low to be close enough (Close is around -22dB)
+        if (RSSI.integerValue < -35) {
+            NSLog("RSSI of %@ is too low to be close enough.", RSSI.integerValue);
+            return;
+        }
+        
+        if (self.vendorPeripheral != peripheral) {
             //Save a local copy of the peripheral, so CB doesn't get rid of it
-            vendorPeripheral = peripheral
+            self.vendorPeripheral = peripheral
             
             //And then connect
             NSLog("Connecting to peripheral %@", peripheral);
             self.centralManager.connectPeripheral(peripheral, options: nil)
-        }*/
+        }
     }
     
     func centralManager(central: CBCentralManager, didFailToConnectPeripheral peripheral: CBPeripheral, error: NSError?) {
@@ -87,6 +94,12 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
     
     
     func cleanup() {
+        NSLog("Cleaning up...")
+        // Don't do anything if we're not connected
+        if (self.vendorPeripheral.state != CBPeripheralState.Connected) {
+            return;
+        }
+        
         // See if we are subscribed to a characteristic on the peripheral
         if let peripheralServices = vendorPeripheral.services {
             for service in peripheralServices {
@@ -109,7 +122,7 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
         
         centralManager.stopScan()
         peripheral.delegate = self
-        peripheral.discoverServices([testServiceUUID])
+        peripheral.discoverServices([CBUUID(string: testServiceUUID)])
     }
     
     func peripheral(peripheral: CBPeripheral, didDiscoverServices error: NSError?) {
@@ -119,7 +132,7 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
         }
         NSLog("Discovered correct service")
         for service in peripheral.services! {
-            peripheral.discoverCharacteristics([testCharacteristicUUID], forService: service)
+            peripheral.discoverCharacteristics([CBUUID(string: testServiceUUID)], forService: service)
         }
     }
     
@@ -129,11 +142,15 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
             return
         }
         
+        NSLog("Searching service %@ for characteristic with UUID %@...", service, testCharacteristicUUID)
         for character in service.characteristics! {
-            if (character.UUID .isEqual(testCharacteristicUUID)){
+            NSLog("Found characteristic with UUID: %@", character.UUID)
+            if (character.UUID.isEqual(CBUUID(string: testCharacteristicUUID))){
+                NSLog("It's the right characteristic!")
                 peripheral.setNotifyValue(true, forCharacteristic: character)
             }
         }
+        NSLog("Couldn't find it.")
     }
     
     func peripheral(peripheral: CBPeripheral, didUpdateValueForCharacteristic characteristic: CBCharacteristic, error: NSError?) {
@@ -153,20 +170,21 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
     }
     
     func peripheral(peripheral: CBPeripheral, didUpdateNotificationStateForCharacteristic characteristic: CBCharacteristic, error: NSError?) {
-        if !(characteristic.UUID.isEqual(testCharacteristicUUID)) {
+        if !(characteristic.UUID.isEqual(CBUUID(string: testCharacteristicUUID))) {
             return
         }
         if (characteristic.isNotifying) {
             NSLog("Notification began on %@", peripheral)
         } else {
             // notification has stopped
+            NSLog("Notification stopped on %@.  Disconnecting", characteristic);
             centralManager.cancelPeripheralConnection(peripheral)
         }
     }
     
     func centralManager(central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: NSError?) {
-        vendorPeripheral = nil
-        centralManager.scanForPeripheralsWithServices([testServiceUUID], options: nil)
+        self.vendorPeripheral = nil
+        centralManager.scanForPeripheralsWithServices([CBUUID(string: testServiceUUID)], options: nil)
     }
     
     /*
