@@ -39,7 +39,7 @@ class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextVie
     func stateChanged(switchState: UISwitch) {
         if switchState.on {
             NSLog("Starting to broadcast...")
-            peripheralManager.startAdvertising([CBAdvertisementDataServiceUUIDsKey : CBUUID(string: testServiceUUID)])
+            peripheralManager.startAdvertising([CBAdvertisementDataServiceUUIDsKey : serviceUUID])
         } else {
             NSLog("Stopping broadcast...")
             peripheralManager.stopAdvertising()
@@ -71,8 +71,8 @@ class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextVie
         //TODO change initial value to value in text field
         NSLog("Creating service/characteristic tree...")
         
-        self.testCharacteristic = CBMutableCharacteristic(type: CBUUID(string: testCharacteristicUUID), properties: CBCharacteristicProperties.Notify, value: nil, permissions: CBAttributePermissions.Readable)
-        let testService = CBMutableService(type: CBUUID(string: testServiceUUID), primary: true)
+        self.testCharacteristic = CBMutableCharacteristic(type: characteristicUUID, properties: CBCharacteristicProperties.Notify, value: nil, permissions: CBAttributePermissions.Readable)
+        let testService = CBMutableService(type: serviceUUID, primary: true)
         
         testService.characteristics = [self.testCharacteristic]
         peripheralManager.addService(testService)

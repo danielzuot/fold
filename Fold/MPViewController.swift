@@ -48,7 +48,7 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
     func centralManagerDidUpdateState(central: CBCentralManager) {
         if central.state == CBCentralManagerState.PoweredOn {
             // Scan for peripherals if BLE is turned on
-            //central.scanForPeripheralsWithServices([CBUUID(string: testServiceUUID)], options: [CBCentralManagerScanOptionAllowDuplicatesKey : true])
+            //central.scanForPeripheralsWithServices([serviceUUID], options: [CBCentralManagerScanOptionAllowDuplicatesKey : true])
             central.scanForPeripheralsWithServices(nil, options: nil)
             NSLog("Starting scan...")
             self.statusLabel.text = "Searching for Fold Vendors"
@@ -121,7 +121,7 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
         
         centralManager.stopScan()
         peripheral.delegate = self
-        peripheral.discoverServices([CBUUID(string: testServiceUUID)])
+        peripheral.discoverServices([serviceUUID])
     }
     
     func peripheral(peripheral: CBPeripheral, didDiscoverServices error: NSError?) {
@@ -131,7 +131,7 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
         }
         NSLog("Discovered correct service")
         for service in peripheral.services! {
-            peripheral.discoverCharacteristics([CBUUID(string: testServiceUUID)], forService: service)
+            peripheral.discoverCharacteristics([serviceUUID], forService: service)
         }
     }
     
@@ -141,10 +141,10 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
             return
         }
         
-        NSLog("Searching service %@ for characteristic with UUID %@...", service, testCharacteristicUUID)
+        NSLog("Searching service %@ for characteristic with UUID %@...", service, CHARACTERISTIC_UUID)
         for character in service.characteristics! {
             NSLog("Found characteristic with UUID: %@", character.UUID)
-            if (character.UUID.isEqual(CBUUID(string: testCharacteristicUUID))){
+            if (character.UUID.isEqual(characteristicUUID)){
                 NSLog("It's the right characteristic!")
                 peripheral.setNotifyValue(true, forCharacteristic: character)
             }
@@ -169,7 +169,7 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
     }
     
     func peripheral(peripheral: CBPeripheral, didUpdateNotificationStateForCharacteristic characteristic: CBCharacteristic, error: NSError?) {
-        if !(characteristic.UUID.isEqual(CBUUID(string: testCharacteristicUUID))) {
+        if !(characteristic.UUID.isEqual(characteristicUUID)) {
             return
         }
         if (characteristic.isNotifying) {
@@ -183,7 +183,7 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
     
     func centralManager(central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: NSError?) {
         self.vendorPeripheral = nil
-        centralManager.scanForPeripheralsWithServices([CBUUID(string: testServiceUUID)], options: nil)
+        centralManager.scanForPeripheralsWithServices([serviceUUID], options: nil)
     }
     
     /*

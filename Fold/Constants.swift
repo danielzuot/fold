@@ -6,7 +6,10 @@
 //  Copyright © 2016 Fold. All rights reserved.
 //
 
-import Foundation
+import CoreBluetooth
 
-let testServiceUUID = "E20A39F4-73F5-4BC4-A12F-17D1AD07A961"
-let testCharacteristicUUID = "08590F7E-DB05-467E-8757-72F6FAEB13D4"
+let SERVICE_UUID = "E20A39F4-73F5-4BC4-A12F-17D1AD07A961"
+let CHARACTERISTIC_UUID = "08590F7E-DB05-467E-8757-72F6FAEB13D4"
+
+let serviceUUID = CBUUID(string: SERVICE_UUID)
+let characteristicUUID = CBUUID(string: CHARACTERISTIC_UUID)
