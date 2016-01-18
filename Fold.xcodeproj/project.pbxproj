@@ -20,6 +20,7 @@
 		8D91712F1C446297008D8507 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D91712E1C446297008D8507 /* Assets.xcassets */; };
 		8D91713D1C446298008D8507 /* FoldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D91713C1C446298008D8507 /* FoldTests.swift */; };
 		8D91714C1C458CFC008D8507 /* NavViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D91714B1C458CFC008D8507 /* NavViewController.swift */; };
+		8DB7BC1B1C4CBD76009FBE7E /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DB7BC1A1C4CBD76009FBE7E /* CoreBluetooth.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 		8D91713C1C446298008D8507 /* FoldTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldTests.swift; sourceTree = "<group>"; };
 		8D91713E1C446298008D8507 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D91714B1C458CFC008D8507 /* NavViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavViewController.swift; sourceTree = "<group>"; };
+		8DB7BC1A1C4CBD76009FBE7E /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DB7BC1B1C4CBD76009FBE7E /* CoreBluetooth.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,6 +91,7 @@
 		8D91711B1C446297008D8507 = {
 			isa = PBXGroup;
 			children = (
+				8DB7BC1A1C4CBD76009FBE7E /* CoreBluetooth.framework */,
 				8D9171261C446297008D8507 /* Fold */,
 				8D91713B1C446298008D8507 /* FoldTests */,
 				8D9171251C446297008D8507 /* Products */,
