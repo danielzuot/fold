@@ -39,6 +39,18 @@ class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextVie
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func switchChanged(sender: AnyObject) {
+        if broadcastingSwitch.on {
+            // All we advertise is our service's UUID
+            peripheralManager!.startAdvertising([
+                CBAdvertisementDataServiceUUIDsKey : [serviceUUID]
+                ])
+            print("Peripheral trying to start advertising")
+        } else {
+            peripheralManager?.stopAdvertising()
+            print("Peripheral stopped advertising")
+        }
+    }
     /** Required protocol method.  A full app should take care of all the possible states,
      *  but we're just waiting for  to know when the CBPeripheralManager is ready
      */
@@ -55,7 +67,7 @@ class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextVie
         
         // Start with the CBMutableCharacteristic
         transferCharacteristic = CBMutableCharacteristic(
-            type: transferCharacteristicUUID,
+            type: characteristicUUID,
             properties: CBCharacteristicProperties.Notify,
             value: nil,
             permissions: CBAttributePermissions.Readable
@@ -63,7 +75,7 @@ class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextVie
         
         // Then the service
         let transferService = CBMutableService(
-            type: transferServiceUUID,
+            type: serviceUUID,
             primary: true
         )
         
@@ -216,20 +228,12 @@ class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextVie
         }
     }
     
-    /** Start advertising
-     */
-    @IBAction func switchChanged(sender: UISwitch) {
-        if broadcastingSwitch.on {
-            // All we advertise is our service's UUID
-            peripheralManager!.startAdvertising([
-                CBAdvertisementDataServiceUUIDsKey : [transferServiceUUID]
-                ])
-        } else {
-            peripheralManager?.stopAdvertising()
-        }
-    }
-    
     func peripheralManagerDidStartAdvertising(peripheral: CBPeripheralManager, error: NSError?) {
-        print(error)
+        if let error = error {
+            print("Error advertising: \(error.localizedDescription)")
+            return
+        }
+        
+        print("Peripheral started advertising.")
     }
 }

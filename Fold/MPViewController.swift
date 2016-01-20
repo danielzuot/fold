@@ -14,7 +14,7 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
     @IBOutlet weak var textView: UITextView!
     
     private var centralManager: CBCentralManager?
-    private var discoveredPeripheral: CBPeripheral?
+    private var vendorPeripheral: CBPeripheral?
     
     // And somewhere to store the incoming data
     private let data = NSMutableData()
@@ -29,7 +29,7 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         
-        print("Stopping scan")
+        NSLog("Stopping scan")
         centralManager?.stopScan()
     }
     
@@ -38,22 +38,11 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
         // Dispose of any resources that can be recreated.
     }
     
-    /** centralManagerDidUpdateState is a required protocol method.
-     *  Usually, you'd check for other states to make sure the current device supports LE, is powered on, etc.
-     *  In this instance, we're just using it to wait for CBCentralManagerStatePoweredOn, which indicates
-     *  the Central is ready to be used.
-     */
     func centralManagerDidUpdateState(central: CBCentralManager) {
-        print("\(__LINE__) \(__FUNCTION__)")
-        
         if central.state != .PoweredOn {
-            // In a real app, you'd deal with all the states correctly
             return
         }
         
-        // The state must be CBCentralManagerStatePoweredOn...
-        
-        // ... so start scanning
         scan()
     }
     
@@ -62,12 +51,12 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
     func scan() {
         
         centralManager?.scanForPeripheralsWithServices(
-            [transferServiceUUID], options: [
-                CBCentralManagerScanOptionAllowDuplicatesKey : NSNumber(bool: true)
+            [serviceUUID], options: [
+                CBCentralManagerScanOptionAllowDuplicatesKey : true
             ]
         )
         
-        print("Scanning started")
+        NSLog("Scanning started")
     }
     
     /** This callback comes whenever a peripheral that is advertising the TRANSFER_SERVICE_UUID is discovered.
@@ -78,19 +67,17 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
         
         // Reject any where the value is above reasonable range
         // Reject if the signal strength is too low to be close enough (Close is around -22dB)
+        if  RSSI.integerValue < -15 && RSSI.integerValue > -35 {
+            NSLog("Device not at correct range")
+            return
+        }
         
-        //        if  RSSI.integerValue < -15 && RSSI.integerValue > -35 {
-        //            println("Device not at correct range")
-        //            return
-        //        }
-        
-        print("Discovered \(peripheral.name) at \(RSSI)")
+        NSLog("Discovered \(peripheral.name) at \(RSSI)")
         
         // Ok, it's in range - have we already seen it?
-        
-        if discoveredPeripheral != peripheral {
+        if vendorPeripheral != peripheral {
             // Save a local copy of the peripheral, so CoreBluetooth doesn't get rid of it
-            discoveredPeripheral = peripheral
+            vendorPeripheral = peripheral
             
             // And connect
             print("Connecting to peripheral \(peripheral)")
@@ -123,7 +110,7 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
         peripheral.delegate = self
         
         // Search only for services that match our UUID
-        peripheral.discoverServices([transferServiceUUID])
+        peripheral.discoverServices([serviceUUID])
     }
     
     /** The Transfer Service was discovered
@@ -139,7 +126,7 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
         
         // Loop through the newly filled peripheral.services array, just in case there's more than one.
         for service in peripheral.services as [CBService]! {
-            peripheral.discoverCharacteristics([transferCharacteristicUUID], forService: service)
+            peripheral.discoverCharacteristics([characteristicUUID], forService: service)
         }
     }
     
@@ -157,7 +144,7 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
         // Again, we loop through the array, just in case.
         for characteristic in service.characteristics as [CBCharacteristic]! {
             // And check if it's the right one
-            if characteristic.UUID.isEqual(transferCharacteristicUUID) {
+            if characteristic.UUID.isEqual(characteristicUUID) {
                 // If it is, subscribe to it
                 peripheral.setNotifyValue(true, forCharacteristic: characteristic)
             }
@@ -199,10 +186,12 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
     /** The peripheral letting us know whether our subscribe/unsubscribe happened or not
      */
     func peripheral(peripheral: CBPeripheral, didUpdateNotificationStateForCharacteristic characteristic: CBCharacteristic, error: NSError?) {
-        print("Error changing notification state: \(error?.localizedDescription)")
+        if let error = error {
+            print("Error changing notification state: \(error.localizedDescription)")
+        }
         
         // Exit if it's not the transfer characteristic
-        if !characteristic.UUID.isEqual(transferCharacteristicUUID) {
+        if !characteristic.UUID.isEqual(characteristicUUID) {
             return
         }
         
@@ -219,7 +208,7 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
      */
     func centralManager(central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: NSError?) {
         print("Peripheral Disconnected")
-        discoveredPeripheral = nil
+        vendorPeripheral = nil
         
         // We're disconnected, so start scanning again
         scan()
@@ -232,17 +221,17 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
     private func cleanup() {
         // Don't do anything if we're not connected
         // self.discoveredPeripheral.isConnected is deprecated
-        if discoveredPeripheral?.state != CBPeripheralState.Connected { // explicit enum required to compile here?
+        if vendorPeripheral?.state != CBPeripheralState.Connected { // explicit enum required to compile here?
             return
         }
         
         // See if we are subscribed to a characteristic on the peripheral
-        if let services = discoveredPeripheral?.services as [CBService]? {
+        if let services = vendorPeripheral?.services as [CBService]? {
             for service in services {
                 if let characteristics = service.characteristics as [CBCharacteristic]? {
                     for characteristic in characteristics {
-                        if characteristic.UUID.isEqual(transferCharacteristicUUID) && characteristic.isNotifying {
-                            discoveredPeripheral?.setNotifyValue(false, forCharacteristic: characteristic)
+                        if characteristic.UUID.isEqual(characteristicUUID) && characteristic.isNotifying {
+                            vendorPeripheral?.setNotifyValue(false, forCharacteristic: characteristic)
                             // And we're done.
                             return
                         }
@@ -252,6 +241,6 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
         }
         
         // If we've got this far, we're connected, but we're not subscribed, so we just disconnect
-        centralManager?.cancelPeripheralConnection(discoveredPeripheral!)
+        centralManager?.cancelPeripheralConnection(vendorPeripheral!)
     }
 }

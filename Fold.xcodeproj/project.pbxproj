@@ -21,6 +21,8 @@
 		8D91713D1C446298008D8507 /* FoldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D91713C1C446298008D8507 /* FoldTests.swift */; };
 		8D91714C1C458CFC008D8507 /* NavViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D91714B1C458CFC008D8507 /* NavViewController.swift */; };
 		8DB7BC1B1C4CBD76009FBE7E /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DB7BC1A1C4CBD76009FBE7E /* CoreBluetooth.framework */; };
+		8DB7BC201C4F18F4009FBE7E /* Fold.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8DB7BC1E1C4F18F4009FBE7E /* Fold.xcdatamodeld */; };
+		8DB7BC221C4F1B09009FBE7E /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DB7BC211C4F1B09009FBE7E /* CoreData.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +54,8 @@
 		8D91713E1C446298008D8507 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D91714B1C458CFC008D8507 /* NavViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavViewController.swift; sourceTree = "<group>"; };
 		8DB7BC1A1C4CBD76009FBE7E /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		8DB7BC1F1C4F18F4009FBE7E /* Fold.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Fold.xcdatamodel; sourceTree = "<group>"; };
+		8DB7BC211C4F1B09009FBE7E /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DB7BC221C4F1B09009FBE7E /* CoreData.framework in Frameworks */,
 				8DB7BC1B1C4CBD76009FBE7E /* CoreBluetooth.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -91,7 +96,8 @@
 		8D91711B1C446297008D8507 = {
 			isa = PBXGroup;
 			children = (
-				8DB7BC1A1C4CBD76009FBE7E /* CoreBluetooth.framework */,
+				8DB7BC1E1C4F18F4009FBE7E /* Fold.xcdatamodeld */,
+				8DB7BC1C1C4F0351009FBE7E /* Frameworks */,
 				8D9171261C446297008D8507 /* Fold */,
 				8D91713B1C446298008D8507 /* FoldTests */,
 				8D9171251C446297008D8507 /* Products */,
@@ -110,11 +116,11 @@
 		8D9171261C446297008D8507 /* Fold */ = {
 			isa = PBXGroup;
 			children = (
+				8DB7BC1D1C4F0372009FBE7E /* Supporting Files */,
 				8D25F5CD1C486B4D007851DD /* Views */,
 				8D9171271C446297008D8507 /* AppDelegate.swift */,
 				8D0036A81C459288008311A4 /* Images.xcassets */,
 				8D91712E1C446297008D8507 /* Assets.xcassets */,
-				8D9171331C446297008D8507 /* Info.plist */,
 				8D4150A81C4C893500CD5E7D /* Constants.swift */,
 			);
 			path = Fold;
@@ -127,6 +133,23 @@
 				8D91713E1C446298008D8507 /* Info.plist */,
 			);
 			path = FoldTests;
+			sourceTree = "<group>";
+		};
+		8DB7BC1C1C4F0351009FBE7E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8DB7BC211C4F1B09009FBE7E /* CoreData.framework */,
+				8DB7BC1A1C4CBD76009FBE7E /* CoreBluetooth.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8DB7BC1D1C4F0372009FBE7E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8D9171331C446297008D8507 /* Info.plist */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -179,7 +202,7 @@
 				TargetAttributes = {
 					8D9171231C446297008D8507 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = W97E5V9FW6;
+						DevelopmentTeam = V982QTRSN7;
 					};
 					8D9171371C446298008D8507 = {
 						CreatedOnToolsVersion = 7.2;
@@ -238,6 +261,7 @@
 				8D9171281C446297008D8507 /* AppDelegate.swift in Sources */,
 				8D25F5CF1C486BD5007851DD /* SettingsViewController.swift in Sources */,
 				8D0036AB1C4711FE008311A4 /* MPViewController.swift in Sources */,
+				8DB7BC201C4F18F4009FBE7E /* Fold.xcdatamodeld in Sources */,
 				8D25F5D31C496356007851DD /* StoreViewController.swift in Sources */,
 				8D4150A91C4C893500CD5E7D /* Constants.swift in Sources */,
 			);
@@ -365,7 +389,7 @@
 				INFOPLIST_FILE = Fold/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.fold.ddoan;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fold.dzuo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -380,7 +404,7 @@
 				INFOPLIST_FILE = Fold/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.fold.ddoan;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fold.dzuo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -441,6 +465,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		8DB7BC1E1C4F18F4009FBE7E /* Fold.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				8DB7BC1F1C4F18F4009FBE7E /* Fold.xcdatamodel */,
+			);
+			currentVersion = 8DB7BC1F1C4F18F4009FBE7E /* Fold.xcdatamodel */;
+			path = Fold.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 8D91711C1C446297008D8507 /* Project object */;
 }
