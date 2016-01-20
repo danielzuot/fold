@@ -12,12 +12,14 @@ import CoreBluetooth
 class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDelegate {
     
     @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var requestedAmountLabel: UILabel!
     
     private var centralManager: CBCentralManager?
     private var vendorPeripheral: CBPeripheral?
     
     // And somewhere to store the incoming data
     private let data = NSMutableData()
+    private var priceReceived: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -160,6 +162,10 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
             return
         }
         
+        priceReceived = NSString(data: characteristic.value!, encoding: NSUTF8StringEncoding) as? String
+        requestedAmountLabel.text = priceReceived
+        
+        /*
         // Have we got everything we need?
         if let stringFromData = NSString(data: characteristic.value!, encoding: NSUTF8StringEncoding) {
             if stringFromData.isEqualToString("EOM") {
@@ -180,7 +186,7 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
             print("Received: \(stringFromData)")
         } else {
             print("Invalid data")
-        }
+        }*/
     }
     
     /** The peripheral letting us know whether our subscribe/unsubscribe happened or not

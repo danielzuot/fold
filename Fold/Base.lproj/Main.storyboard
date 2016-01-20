@@ -118,11 +118,24 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Requested amount:   $" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="idL-s4-eQW">
+                                <rect key="frame" x="50" y="403" width="173" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X3k-Ox-f3c">
+                                <rect key="frame" x="238" y="403" width="35" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Make Payment" id="dND-u7-Pzw"/>
                     <connections>
+                        <outlet property="requestedAmountLabel" destination="X3k-Ox-f3c" id="QYm-j8-EAk"/>
                         <outlet property="textView" destination="lwA-5M-oyB" id="AXM-QT-t0e"/>
                     </connections>
                 </viewController>
@@ -210,7 +223,7 @@
                                     <action selector="switchChanged:" destination="a71-kc-SL4" eventType="valueChanged" id="Qwk-eH-6WB"/>
                                 </connections>
                             </switch>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Please fucking work" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="DdA-Nr-Y2V">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" text="Please fucking work" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="DdA-Nr-Y2V">
                                 <rect key="frame" x="50" y="154" width="500" height="100"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -220,6 +233,20 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dM9-yY-lrT">
+                                <rect key="frame" x="169" y="278" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" returnKeyType="go"/>
+                                <connections>
+                                    <action selector="priceChanged:" destination="a71-kc-SL4" eventType="valueChanged" id="Ac9-Bd-a3T"/>
+                                </connections>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Price:        $" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pHE-An-SGQ">
+                                <rect key="frame" x="71" y="282" width="90" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -232,6 +259,7 @@
                     <navigationItem key="navigationItem" title="Request Payment" id="gsa-Bp-Qkf"/>
                     <connections>
                         <outlet property="broadcastingSwitch" destination="kpe-bo-a3S" id="Fcc-cn-u9N"/>
+                        <outlet property="priceText" destination="dM9-yY-lrT" id="Ghf-O9-8QT"/>
                         <outlet property="textView" destination="DdA-Nr-Y2V" id="1Mr-95-c1O"/>
                     </connections>
                 </viewController>

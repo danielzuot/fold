@@ -9,7 +9,9 @@
 import UIKit
 import CoreBluetooth
 
-class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextViewDelegate {
+class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextFieldDelegate {
+    
+    @IBOutlet private weak var priceText: UITextField!
     @IBOutlet private weak var textView: UITextView!
     @IBOutlet private weak var broadcastingSwitch: UISwitch!
     
@@ -19,12 +21,16 @@ class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextVie
     private var dataToSend: NSData?
     private var sendDataIndex: Int?
     
+    private var priceToSend: String?
+   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
         // Start up the CBPeripheralManager
         peripheralManager = CBPeripheralManager(delegate: self, queue: nil)
+        self.priceText.delegate = self
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -92,13 +98,20 @@ class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextVie
         print("Central subscribed to characteristic")
         
         // Get the data
-        dataToSend = textView.text.dataUsingEncoding(NSUTF8StringEncoding)
+        priceToSend = priceText.text!
+        peripheralManager?.updateValue(
+            (priceToSend! as NSString).dataUsingEncoding(NSUTF8StringEncoding)!,
+            forCharacteristic: transferCharacteristic!,
+            onSubscribedCentrals: nil
+        )
+        
+        /*dataToSend = textView.text.dataUsingEncoding(NSUTF8StringEncoding)
         
         // Reset the index
         sendDataIndex = 0;
         
         // Start sending
-        sendData()
+        sendData()*/
     }
     
     /** Recognise when the central unsubscribes
@@ -215,12 +228,25 @@ class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextVie
      */
     func peripheralManagerIsReadyToUpdateSubscribers(peripheral: CBPeripheralManager) {
         // Start sending again
-        sendData()
+        //sendData()
     }
     
     /** This is called when a change happens, so we know to stop advertising
      */
     func textViewDidChange(textView: UITextView) {
+        // If we're already advertising, stop
+        if (broadcastingSwitch.on) {
+            broadcastingSwitch.setOn(false, animated: true)
+            peripheralManager?.stopAdvertising()
+        }
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return false
+    }
+    
+    @IBAction func priceChanged(sender: AnyObject) {
         // If we're already advertising, stop
         if (broadcastingSwitch.on) {
             broadcastingSwitch.setOn(false, animated: true)
