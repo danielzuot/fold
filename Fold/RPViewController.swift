@@ -12,7 +12,6 @@ import CoreBluetooth
 class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextFieldDelegate {
     
     @IBOutlet private weak var priceText: UITextField!
-    @IBOutlet private weak var textView: UITextView!
     @IBOutlet private weak var broadcastingSwitch: UISwitch!
     
     private var peripheralManager: CBPeripheralManager?
@@ -104,14 +103,6 @@ class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextFie
             forCharacteristic: transferCharacteristic!,
             onSubscribedCentrals: nil
         )
-        
-        /*dataToSend = textView.text.dataUsingEncoding(NSUTF8StringEncoding)
-        
-        // Reset the index
-        sendDataIndex = 0;
-        
-        // Start sending
-        sendData()*/
     }
     
     /** Recognise when the central unsubscribes

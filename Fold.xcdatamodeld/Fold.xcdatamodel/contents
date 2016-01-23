@@ -4,9 +4,12 @@
         <attribute name="access_token" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="refresh_token" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="Vendor" syncable="YES"/>
+    <entity name="Vendor" syncable="YES">
+        <attribute name="access_token" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="refresh_token" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <elements>
         <element name="User" positionX="-63" positionY="-18" width="128" height="73"/>
-        <element name="Vendor" positionX="-54" positionY="-9" width="128" height="45"/>
+        <element name="Vendor" positionX="-54" positionY="-9" width="128" height="75"/>
     </elements>
 </model>

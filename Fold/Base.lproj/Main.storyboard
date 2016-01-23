@@ -112,12 +112,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="lwA-5M-oyB">
-                                <rect key="frame" x="50" y="91" width="240" height="296"/>
-                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Requested amount:   $" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="idL-s4-eQW">
                                 <rect key="frame" x="50" y="403" width="173" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -136,7 +130,6 @@
                     <navigationItem key="navigationItem" title="Make Payment" id="dND-u7-Pzw"/>
                     <connections>
                         <outlet property="requestedAmountLabel" destination="X3k-Ox-f3c" id="QYm-j8-EAk"/>
-                        <outlet property="textView" destination="lwA-5M-oyB" id="AXM-QT-t0e"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yOY-G9-Vee" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -223,16 +216,6 @@
                                     <action selector="switchChanged:" destination="a71-kc-SL4" eventType="valueChanged" id="Qwk-eH-6WB"/>
                                 </connections>
                             </switch>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" text="Please fucking work" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="DdA-Nr-Y2V">
-                                <rect key="frame" x="50" y="154" width="500" height="100"/>
-                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="Vu8-mD-EpD"/>
-                                    <constraint firstAttribute="width" constant="500" id="dMl-C8-NMi"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dM9-yY-lrT">
                                 <rect key="frame" x="169" y="278" width="97" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -250,8 +233,6 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="DdA-Nr-Y2V" firstAttribute="centerX" secondItem="bM7-qb-WWv" secondAttribute="centerX" id="6qW-b5-FOy"/>
-                            <constraint firstItem="DdA-Nr-Y2V" firstAttribute="top" secondItem="nWB-Vt-5So" secondAttribute="bottom" constant="134" id="8ZX-41-okb"/>
                             <constraint firstItem="Z4U-u9-xAV" firstAttribute="top" secondItem="kpe-bo-a3S" secondAttribute="bottom" constant="175" id="LQQ-JJ-cVB"/>
                             <constraint firstItem="kpe-bo-a3S" firstAttribute="centerX" secondItem="bM7-qb-WWv" secondAttribute="centerX" id="ygd-pM-Ecj"/>
                         </constraints>
@@ -260,12 +241,11 @@
                     <connections>
                         <outlet property="broadcastingSwitch" destination="kpe-bo-a3S" id="Fcc-cn-u9N"/>
                         <outlet property="priceText" destination="dM9-yY-lrT" id="Ghf-O9-8QT"/>
-                        <outlet property="textView" destination="DdA-Nr-Y2V" id="1Mr-95-c1O"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QXe-e8-luM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="987" y="-1524"/>
+            <point key="canvasLocation" x="781" y="-1998"/>
         </scene>
         <!--My Store-->
         <scene sceneID="hgL-Pr-46B">
@@ -279,7 +259,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sky-XR-EmJ">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sky-XR-EmJ">
                                 <rect key="frame" x="175" y="203" width="250" height="50"/>
                                 <color key="backgroundColor" red="0.23529411759999999" green="0.67843137249999996" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -293,7 +273,7 @@
                                     <segue destination="a71-kc-SL4" kind="show" id="iTX-9p-tXd"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="taW-hb-3te">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="taW-hb-3te">
                                 <rect key="frame" x="175" y="103" width="250" height="50"/>
                                 <color key="backgroundColor" red="0.23529411759999999" green="0.67843137249999996" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -320,7 +300,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ovb-0Y-xt8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="987" y="-783"/>
+            <point key="canvasLocation" x="765" y="-1173"/>
         </scene>
         <!--Login-->
         <scene sceneID="mYM-mE-bdf">
@@ -354,9 +334,6 @@
                                 <state key="normal" title="Login">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="zTo-CZ-7i7"/>
-                                </connections>
                             </button>
                         </subviews>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -376,7 +353,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KGG-sg-rfw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="275" y="-329"/>
+            <point key="canvasLocation" x="147" y="-357"/>
         </scene>
     </scenes>
     <resources>

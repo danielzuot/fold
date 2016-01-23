@@ -11,7 +11,6 @@ import CoreBluetooth
 
 class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDelegate {
     
-    @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var requestedAmountLabel: UILabel!
     
     private var centralManager: CBCentralManager?
@@ -164,29 +163,6 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
         
         priceReceived = NSString(data: characteristic.value!, encoding: NSUTF8StringEncoding) as? String
         requestedAmountLabel.text = priceReceived
-        
-        /*
-        // Have we got everything we need?
-        if let stringFromData = NSString(data: characteristic.value!, encoding: NSUTF8StringEncoding) {
-            if stringFromData.isEqualToString("EOM") {
-                // We have, so show the data,
-                textView.text = NSString(data: (data.copy() as! NSData) as NSData, encoding: NSUTF8StringEncoding) as! String
-                
-                // Cancel our subscription to the characteristic
-                peripheral.setNotifyValue(false, forCharacteristic: characteristic)
-                
-                // and disconnect from the peripehral
-                centralManager?.cancelPeripheralConnection(peripheral)
-            }
-            
-            // Otherwise, just add the data on to what we already have
-            data.appendData(characteristic.value!)
-            
-            // Log it
-            print("Received: \(stringFromData)")
-        } else {
-            print("Invalid data")
-        }*/
     }
     
     /** The peripheral letting us know whether our subscribe/unsubscribe happened or not
