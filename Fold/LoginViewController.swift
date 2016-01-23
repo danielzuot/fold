@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import coinbase_official
 
 class LoginViewController: UIViewController {
 

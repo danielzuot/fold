@@ -23,7 +23,6 @@
 		8DB7BC1B1C4CBD76009FBE7E /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DB7BC1A1C4CBD76009FBE7E /* CoreBluetooth.framework */; };
 		8DB7BC201C4F18F4009FBE7E /* Fold.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8DB7BC1E1C4F18F4009FBE7E /* Fold.xcdatamodeld */; };
 		8DB7BC221C4F1B09009FBE7E /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DB7BC211C4F1B09009FBE7E /* CoreData.framework */; };
-		F0163D4BA57DBD4F44D0D884 /* Pods_Fold.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9323408ECD22AA9BF63F7275 /* Pods_Fold.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +36,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		7C366919043FD12172AAA0FE /* Pods-Fold.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fold.release.xcconfig"; path = "Pods/Target Support Files/Pods-Fold/Pods-Fold.release.xcconfig"; sourceTree = "<group>"; };
 		8D0036A81C459288008311A4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8D0036AA1C4711FE008311A4 /* MPViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPViewController.swift; sourceTree = "<group>"; };
 		8D25F5CB1C486B44007851DD /* WalletViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
@@ -58,8 +56,6 @@
 		8DB7BC1A1C4CBD76009FBE7E /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		8DB7BC1F1C4F18F4009FBE7E /* Fold.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Fold.xcdatamodel; sourceTree = "<group>"; };
 		8DB7BC211C4F1B09009FBE7E /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		9323408ECD22AA9BF63F7275 /* Pods_Fold.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fold.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		ECB1B9E499009167DB2C4CF1 /* Pods-Fold.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fold.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fold/Pods-Fold.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,7 +65,6 @@
 			files = (
 				8DB7BC221C4F1B09009FBE7E /* CoreData.framework in Frameworks */,
 				8DB7BC1B1C4CBD76009FBE7E /* CoreBluetooth.framework in Frameworks */,
-				F0163D4BA57DBD4F44D0D884 /* Pods_Fold.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -106,7 +101,6 @@
 				8D9171261C446297008D8507 /* Fold */,
 				8D91713B1C446298008D8507 /* FoldTests */,
 				8D9171251C446297008D8507 /* Products */,
-				CD04C64CE1A9CBDBDB95DE21 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -146,7 +140,6 @@
 			children = (
 				8DB7BC211C4F1B09009FBE7E /* CoreData.framework */,
 				8DB7BC1A1C4CBD76009FBE7E /* CoreBluetooth.framework */,
-				9323408ECD22AA9BF63F7275 /* Pods_Fold.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -159,15 +152,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		CD04C64CE1A9CBDBDB95DE21 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				ECB1B9E499009167DB2C4CF1 /* Pods-Fold.debug.xcconfig */,
-				7C366919043FD12172AAA0FE /* Pods-Fold.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -175,12 +159,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8D9171411C446298008D8507 /* Build configuration list for PBXNativeTarget "Fold" */;
 			buildPhases = (
-				812C2A73BDF1F3601C84E78B /* Check Pods Manifest.lock */,
 				8D9171201C446297008D8507 /* Sources */,
 				8D9171211C446297008D8507 /* Frameworks */,
 				8D9171221C446297008D8507 /* Resources */,
-				204C6276E159086CDE9CD8C2 /* Embed Pods Frameworks */,
-				3F4076401A210A0A1A299E1F /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -268,54 +249,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		204C6276E159086CDE9CD8C2 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Fold/Pods-Fold-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		3F4076401A210A0A1A299E1F /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Fold/Pods-Fold-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		812C2A73BDF1F3601C84E78B /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		8D9171201C446297008D8507 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -368,6 +301,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -404,7 +338,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
-				SWIFT_OBJC_BRIDGING_HEADER = Fold/Bridging.h;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -414,6 +348,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -443,7 +378,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OBJC_BRIDGING_HEADER = Fold/Bridging.h;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -451,7 +386,6 @@
 		};
 		8D9171421C446298008D8507 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ECB1B9E499009167DB2C4CF1 /* Pods-Fold.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -463,14 +397,13 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.fold.dzuo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "Fold/Fold-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		8D9171431C446298008D8507 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7C366919043FD12172AAA0FE /* Pods-Fold.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -482,7 +415,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.fold.dzuo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "Fold/Fold-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Release;
 		};

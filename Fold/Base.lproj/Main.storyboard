@@ -191,12 +191,14 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="LCy-6s-hJX" kind="relationship" relationship="rootViewController" id="GFV-nO-kOr"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="userLoggedIn" id="HLQ-Lw-IfQ"/>
+                        <segue destination="Kma-55-N8I" kind="show" identifier="vendorLoggedIn" id="MEZ-XW-h4E"/>
+                        <segue destination="LCy-6s-hJX" kind="show" identifier="notLoggedIn" id="z2z-f2-2tk"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iMi-If-Daw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-537" y="-336"/>
+            <point key="canvasLocation" x="-647" y="-357"/>
         </scene>
         <!--Request Payment-->
         <scene sceneID="Mhx-Om-AXg">
@@ -360,4 +362,7 @@
         <image name="6797196-green-background" width="1920" height="1200"/>
         <image name="Settings" width="25" height="25"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="eza-aV-qNu"/>
+    </inferredMetricsTieBreakers>
 </document>

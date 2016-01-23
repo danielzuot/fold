@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 class NavViewController: UINavigationController {
 
     override func viewDidLoad() {
@@ -17,6 +16,25 @@ class NavViewController: UINavigationController {
         // Do any additional setup after loading the view.
     }
 
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        let isLoggedIn:Int = prefs.integerForKey("ISLOGGEDIN") as Int
+        /* 
+         0 => not logged in
+         1 => user logged in
+         2 => vendor logged in 
+        */
+        if (isLoggedIn == 0) {
+            self.performSegueWithIdentifier("notLoggedIn", sender: self)
+        } else if (isLoggedIn == 1) {
+            self.performSegueWithIdentifier("userLoggedIn", sender: self)
+        } else {
+            self.performSegueWithIdentifier("vendorLoggedIn", sender: self)
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
