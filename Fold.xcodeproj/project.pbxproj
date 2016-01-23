@@ -46,7 +46,6 @@
 		8D25F5D21C496356007851DD /* StoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreViewController.swift; sourceTree = "<group>"; };
 		8D25F5D41C49657E007851DD /* RPViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RPViewController.swift; sourceTree = "<group>"; };
 		8D4150A81C4C893500CD5E7D /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		8D6F59251C53088100CB99F3 /* Fold-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Fold-Bridging-Header.h"; sourceTree = "<group>"; };
 		8D9171241C446297008D8507 /* Fold.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fold.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D9171271C446297008D8507 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8D91712C1C446297008D8507 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -129,7 +128,6 @@
 				8D0036A81C459288008311A4 /* Images.xcassets */,
 				8D91712E1C446297008D8507 /* Assets.xcassets */,
 				8D4150A81C4C893500CD5E7D /* Constants.swift */,
-				8D6F59251C53088100CB99F3 /* Fold-Bridging-Header.h */,
 			);
 			path = Fold;
 			sourceTree = "<group>";
