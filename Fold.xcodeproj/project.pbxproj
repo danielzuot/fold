@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		04249989CB4A11A1FA2E9248 /* Pods_Fold.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DABFB581376924BA0AC830C /* Pods_Fold.framework */; };
 		8D0036A91C459288008311A4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D0036A81C459288008311A4 /* Images.xcassets */; };
 		8D0036AB1C4711FE008311A4 /* MPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0036AA1C4711FE008311A4 /* MPViewController.swift */; };
 		8D25F5CC1C486B44007851DD /* WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D25F5CB1C486B44007851DD /* WalletViewController.swift */; };
@@ -24,6 +23,7 @@
 		8DB7BC1B1C4CBD76009FBE7E /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DB7BC1A1C4CBD76009FBE7E /* CoreBluetooth.framework */; };
 		8DB7BC201C4F18F4009FBE7E /* Fold.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8DB7BC1E1C4F18F4009FBE7E /* Fold.xcdatamodeld */; };
 		8DB7BC221C4F1B09009FBE7E /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DB7BC211C4F1B09009FBE7E /* CoreData.framework */; };
+		9473A639E1031A3C3604007C /* libPods-Fold.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 63FCBB29B2C4F82971CD64E5 /* libPods-Fold.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,7 +39,7 @@
 /* Begin PBXFileReference section */
 		0E7A12061CF4DC960C062FF5 /* Pods-Fold.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fold.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fold/Pods-Fold.debug.xcconfig"; sourceTree = "<group>"; };
 		12906F27A54469C73CB96F7E /* Pods-Fold.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fold.release.xcconfig"; path = "Pods/Target Support Files/Pods-Fold/Pods-Fold.release.xcconfig"; sourceTree = "<group>"; };
-		7DABFB581376924BA0AC830C /* Pods_Fold.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fold.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		63FCBB29B2C4F82971CD64E5 /* libPods-Fold.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Fold.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D0036A81C459288008311A4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8D0036AA1C4711FE008311A4 /* MPViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPViewController.swift; sourceTree = "<group>"; };
 		8D25F5CB1C486B44007851DD /* WalletViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
@@ -48,6 +48,7 @@
 		8D25F5D21C496356007851DD /* StoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreViewController.swift; sourceTree = "<group>"; };
 		8D25F5D41C49657E007851DD /* RPViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RPViewController.swift; sourceTree = "<group>"; };
 		8D4150A81C4C893500CD5E7D /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		8D732C591C542FAF00D921F7 /* Fold-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Fold-Bridging-Header.h"; sourceTree = "<group>"; };
 		8D9171241C446297008D8507 /* Fold.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fold.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D9171271C446297008D8507 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8D91712C1C446297008D8507 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -69,7 +70,7 @@
 			files = (
 				8DB7BC221C4F1B09009FBE7E /* CoreData.framework in Frameworks */,
 				8DB7BC1B1C4CBD76009FBE7E /* CoreBluetooth.framework in Frameworks */,
-				04249989CB4A11A1FA2E9248 /* Pods_Fold.framework in Frameworks */,
+				9473A639E1031A3C3604007C /* libPods-Fold.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,6 +138,7 @@
 				8D0036A81C459288008311A4 /* Images.xcassets */,
 				8D91712E1C446297008D8507 /* Assets.xcassets */,
 				8D4150A81C4C893500CD5E7D /* Constants.swift */,
+				8D732C591C542FAF00D921F7 /* Fold-Bridging-Header.h */,
 			);
 			path = Fold;
 			sourceTree = "<group>";
@@ -155,7 +157,7 @@
 			children = (
 				8DB7BC211C4F1B09009FBE7E /* CoreData.framework */,
 				8DB7BC1A1C4CBD76009FBE7E /* CoreBluetooth.framework */,
-				7DABFB581376924BA0AC830C /* Pods_Fold.framework */,
+				63FCBB29B2C4F82971CD64E5 /* libPods-Fold.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -465,7 +467,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.fold.dzuo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Fold/Fold-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -484,7 +486,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.fold.dzuo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Fold/Fold-Bridging-Header.h";
 			};
 			name = Release;
 		};

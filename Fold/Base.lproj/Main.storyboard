@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wxz-vy-pjb">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wxz-vy-pjb">
                                 <rect key="frame" x="175" y="204" width="250" height="50"/>
                                 <color key="backgroundColor" red="0.23529411759999999" green="0.67843137249999996" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -30,7 +30,7 @@
                                     <segue destination="Fwy-Mz-ur5" kind="show" id="Ne1-64-Hax"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pTO-ih-rXE">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pTO-ih-rXE">
                                 <rect key="frame" x="175" y="274" width="250" height="50"/>
                                 <color key="backgroundColor" red="0.23529411759999999" green="0.67843137249999996" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -44,7 +44,7 @@
                                     <segue destination="bLx-8o-Ycx" kind="show" id="F5e-En-c5P"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RpQ-QZ-sJ8">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RpQ-QZ-sJ8">
                                 <rect key="frame" x="175" y="342" width="250" height="50"/>
                                 <color key="backgroundColor" red="0.23529411759999999" green="0.67843137249999996" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -193,12 +193,11 @@
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="userLoggedIn" id="HLQ-Lw-IfQ"/>
                         <segue destination="Kma-55-N8I" kind="show" identifier="vendorLoggedIn" id="MEZ-XW-h4E"/>
-                        <segue destination="LCy-6s-hJX" kind="show" identifier="notLoggedIn" id="z2z-f2-2tk"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iMi-If-Daw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-647" y="-357"/>
+            <point key="canvasLocation" x="-11" y="-481"/>
         </scene>
         <!--Request Payment-->
         <scene sceneID="Mhx-Om-AXg">
@@ -304,65 +303,8 @@
             </objects>
             <point key="canvasLocation" x="765" y="-1173"/>
         </scene>
-        <!--Login-->
-        <scene sceneID="mYM-mE-bdf">
-            <objects>
-                <viewController id="LCy-6s-hJX" customClass="LoginViewController" customModule="Fold" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="ToE-HB-cM1"/>
-                        <viewControllerLayoutGuide type="bottom" id="6Rm-8U-dMa"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="qz5-A5-eIj">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="6797196-green-background" translatesAutoresizingMaskIntoConstraints="NO" id="Z2V-0z-O99">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" red="0.23529411759999999" green="0.67843137249999996" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4JC-Ew-Mk5">
-                                <rect key="frame" x="255" y="523" width="91" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal" title="Vendor Login">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="Kma-55-N8I" kind="show" id="eza-aV-qNu"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NZL-zk-wOE">
-                                <rect key="frame" x="244" y="406" width="112" height="67"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="46"/>
-                                <state key="normal" title="Login">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                        </subviews>
-                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="Z2V-0z-O99" firstAttribute="width" secondItem="qz5-A5-eIj" secondAttribute="width" id="2wY-bp-NLY"/>
-                            <constraint firstItem="Z2V-0z-O99" firstAttribute="centerY" secondItem="qz5-A5-eIj" secondAttribute="centerY" id="BoC-Qp-2yA"/>
-                            <constraint firstItem="4JC-Ew-Mk5" firstAttribute="centerX" secondItem="qz5-A5-eIj" secondAttribute="centerX" id="J1v-39-yoA"/>
-                            <constraint firstItem="Z2V-0z-O99" firstAttribute="centerX" secondItem="qz5-A5-eIj" secondAttribute="centerX" id="TCe-ZG-xci"/>
-                            <constraint firstItem="4JC-Ew-Mk5" firstAttribute="top" secondItem="NZL-zk-wOE" secondAttribute="bottom" constant="50" id="hIx-Uz-469"/>
-                            <constraint firstItem="Z2V-0z-O99" firstAttribute="height" secondItem="qz5-A5-eIj" secondAttribute="height" id="nH4-l2-621"/>
-                            <constraint firstItem="NZL-zk-wOE" firstAttribute="centerX" secondItem="qz5-A5-eIj" secondAttribute="centerX" id="tBN-cU-tyI"/>
-                            <constraint firstItem="4JC-Ew-Mk5" firstAttribute="top" secondItem="Z2V-0z-O99" secondAttribute="bottom" constant="-77" id="xgd-fd-eCg"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Login" id="rx3-cC-eNb"/>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="KGG-sg-rfw" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="147" y="-357"/>
-        </scene>
     </scenes>
     <resources>
-        <image name="6797196-green-background" width="1920" height="1200"/>
         <image name="Settings" width="25" height="25"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="eza-aV-qNu"/>
-    </inferredMetricsTieBreakers>
 </document>

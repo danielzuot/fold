@@ -40,6 +40,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
+    
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+        if url.scheme == "com.example.app.coinbase-oauth" {
+            CoinbaseOAuth.finishOAuthAuthenticationForUrl(url, clientId: "your client ID", clientSecret: "your client secret", completion: { (result : AnyObject?, error: NSError?) -> Void in
+                if error != nil {
+                    // Could not authenticate.
+                } else {
+                    // Tokens successfully obtained!
+                    // Do something with them (store them, etc.)
+                    if let result = result as? [String : AnyObject] {
+                        NSLog(result.keys.joinWithSeparator(", "))
+                        if let accessToken = result["access_token"] as? String {
+                            NSLog("Access token %@", accessToken)
+                        }
+                        if let expiresIn = result["expire_in"] as? String {
+                            NSLog("Expires in %@", expiresIn)
+                        }
+                    }
+                    // Note that you should also store 'expire_in' and refresh the token using CoinbaseOAuth.getOAuthTokensForRefreshToken() when it expires
+                }
+            })
+            return true
+        }
+        else {
+            return false
+        }
+    }
 
 
 }
