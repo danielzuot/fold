@@ -62,10 +62,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         if let refreshToken = result["refresh_token"] as? String {
                             NSLog("Refresh token %@", refreshToken)
                         }
-                        if let expiresIn = result["expires_in"] as? String {
-                            NSLog("Expires in %@", expiresIn)
+                        if let expiresIn = result["expires_in"] as? Int {
+                            NSLog("Expires in \(expiresIn)")
                         }
-                        
                         NSNotificationCenter.defaultCenter().postNotificationName(AUTH_SUCCESS_NOTIFICATION, object: result)
                     }
                 }

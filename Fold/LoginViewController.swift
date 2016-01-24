@@ -10,11 +10,6 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
-    private var client: Coinbase?
-    private var accessToken: String?
-    private var refreshToken: String?
-    private var expiresIn: String?
-    
     @IBOutlet weak var loginButton: UIButton!
     
     override func viewDidLoad() {
@@ -45,9 +40,9 @@ class LoginViewController: UIViewController {
         if let response = notification.object as? [String : AnyObject] {
             let userDefaults = NSUserDefaults.standardUserDefaults()
             
-            self.accessToken = response["access_token"] as? String
-            self.refreshToken = response["refresh_token"] as? String
-            self.expiresIn = response["expires_in"] as? String
+            let accessToken = response["access_token"] as? String
+            let refreshToken = response["refresh_token"] as? String
+            let expiresIn = response["expires_in"] as? String
             
             userDefaults.setValue(accessToken, forKey: "access_token")
             userDefaults.setValue(refreshToken, forKey: "refresh_token")
