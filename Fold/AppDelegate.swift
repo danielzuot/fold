@@ -42,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
-        if url.scheme == "com.example.app.coinbase-oauth" {
+        if url.scheme == "com.fold.app.coinbase-oath" {
             CoinbaseOAuth.finishOAuthAuthenticationForUrl(url, clientId: CLIENT_ID, clientSecret: CLIENT_SECRET, completion: { (result : AnyObject?, error: NSError?) -> Void in
                 if let error = error {
                     // Could not authenticate.
@@ -62,14 +62,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         if let refreshToken = result["refresh_token"] as? String {
                             NSLog("Refresh token %@", refreshToken)
                         }
-                        if let expiresIn = result["expire_in"] as? String {
+                        if let expiresIn = result["expires_in"] as? String {
                             NSLog("Expires in %@", expiresIn)
                         }
                         
-                        if let loginViewController = self.window?.rootViewController?.presentedViewController as? LoginViewController {
-                            loginViewController.authenticationSuccessful(result)
-                        }
-                        
+                        NSNotificationCenter.defaultCenter().postNotificationName(AUTH_SUCCESS_NOTIFICATION, object: result)
                     }
                 }
             })

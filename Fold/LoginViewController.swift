@@ -21,7 +21,7 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "authenticationSuccessful:", name: AUTH_SUCCESS_NOTIFICATION, object: nil)
         
     }
 
@@ -40,27 +40,33 @@ class LoginViewController: UIViewController {
         )
     }
     
-    func authenticationSuccessful(response: NSDictionary) {
-        NSLog("Authentication successful! Tokens retrieved.")
-        let userDefaults = NSUserDefaults.standardUserDefaults()
+    dynamic private func authenticationSuccessful(notification: NSNotification) {
+        NSLog("Notification received: Authentication successful! Tokens retrieved.")
+        if let response = notification.object as? [String : AnyObject] {
+            let userDefaults = NSUserDefaults.standardUserDefaults()
+            
+            self.accessToken = response["access_token"] as? String
+            self.refreshToken = response["refresh_token"] as? String
+            self.expiresIn = response["expires_in"] as? String
+            
+            userDefaults.setValue(accessToken, forKey: "access_token")
+            userDefaults.setValue(refreshToken, forKey: "refresh_token")
+            userDefaults.setValue(expiresIn, forKey: "expires_in")
+            
+            // TODO check if user or vendor
+            // for now assuming user
+            userDefaults.setValue(1, forKey: "is_logged_in")
+            userDefaults.setValue(1, forKey: "is_user")
+            userDefaults.setValue(0, forKey: "is_vendor")
+            
+            userDefaults.synchronize()
+            
+            self.performSegueWithIdentifier("userLoggedIn", sender: self)
+        } else {
+            NSLog("Didn't recognize object")
+        }
         
-        self.accessToken = response.objectForKey("access_token") as? String
-        self.refreshToken = response.objectForKey("refresh_token") as? String
-        self.expiresIn = response.objectForKey("expires_in") as? String
         
-        userDefaults.setValue(accessToken, forKey: "access_token")
-        userDefaults.setValue(refreshToken, forKey: "refresh_token")
-        userDefaults.setValue(expiresIn, forKey: "expires_in")
-        
-        // TODO check if user or vendor
-        // for now assuming user
-        userDefaults.setValue(1, forKey: "is_logged_in")
-        userDefaults.setValue(1, forKey: "is_user")
-        userDefaults.setValue(0, forKey: "is_vendor")
-        
-        userDefaults.synchronize()
-        
-        self.performSegueWithIdentifier("userLoggedIn", sender: self)
         
         
     }
