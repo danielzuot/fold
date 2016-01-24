@@ -10,40 +10,30 @@ import UIKit
 
 class NavViewController: UINavigationController {
     
-    var client: Coinbase?
-    var accessToken: String?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
     }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        let userType = prefs.integerForKey("")
-        if let accessToken = prefs.stringForKey("access_token") {
-            
-        }
-        
-        
-        
-        
-        let isLoggedIn:Int = prefs.integerForKey("ISLOGGEDIN") as Int
-        /* 
-         0 => not logged in
-         1 => user logged in
-         2 => vendor logged in 
-        */
+        let isLoggedIn = prefs.integerForKey("is_logged_in")
         if (isLoggedIn == 0) {
+            NSLog("Not logged in")
             self.performSegueWithIdentifier("notLoggedIn", sender: self)
-        } else if (isLoggedIn == 1) {
-            self.performSegueWithIdentifier("userLoggedIn", sender: self)
         } else {
-            self.performSegueWithIdentifier("vendorLoggedIn", sender: self)
+            NSLog("Logged in already...")
+            let isUser = prefs.integerForKey("is_user")
+            if (isUser == 0) {
+                NSLog("...as vendor")
+                self.performSegueWithIdentifier("vendorAlreadyLoggedIn", sender: self)
+            } else {
+                NSLog("...as user")
+                self.performSegueWithIdentifier("userAlreadyLoggedIn", sender: self)
+            }
         }
     }
     

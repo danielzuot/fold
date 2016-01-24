@@ -58,6 +58,18 @@
                                     <segue destination="MnT-hG-GNR" kind="show" id="ZDD-ZC-3kJ"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Balance:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HBV-v5-kt5">
+                                <rect key="frame" x="93" y="88" width="66" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0.00 BTC" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JFU-CJ-Vpj">
+                                <rect key="frame" x="169" y="88" width="72" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -76,6 +88,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="balanceLabel" destination="JFU-CJ-Vpj" id="ajI-eH-vcB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -191,13 +206,53 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="show" identifier="userLoggedIn" id="HLQ-Lw-IfQ"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="userAlreadyLoggedIn" id="HLQ-Lw-IfQ"/>
                         <segue destination="Kma-55-N8I" kind="show" identifier="vendorLoggedIn" id="MEZ-XW-h4E"/>
+                        <segue destination="DKf-eN-jQC" kind="show" identifier="notLoggedIn" id="IUz-WD-qSw"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iMi-If-Daw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-11" y="-481"/>
+            <point key="canvasLocation" x="-3" y="-505"/>
+        </scene>
+        <!--Login View Controller-->
+        <scene sceneID="dDh-HZ-Sh9">
+            <objects>
+                <viewController id="DKf-eN-jQC" customClass="LoginViewController" customModule="Fold" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7ip-FD-sgY"/>
+                        <viewControllerLayoutGuide type="bottom" id="2P9-Ep-ysB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="exs-K8-1Ex">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VyO-lg-ngv">
+                                <rect key="frame" x="175" y="142" width="250" height="51"/>
+                                <color key="backgroundColor" red="0.23529411759999999" green="0.67843137249999996" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="8g9-0J-ALz"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="c8b-ET-UxP"/>
+                                </constraints>
+                                <state key="normal" title="Login">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="authenticateLogin:" destination="DKf-eN-jQC" eventType="touchUpInside" id="62x-VM-g69"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="loginButton" destination="VyO-lg-ngv" id="eWh-qi-vKY"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="userLoggedIn" id="vfq-nN-YA0"/>
+                        <segue destination="Kma-55-N8I" kind="show" identifier="vendorLoggedIn" id="twz-P5-jGH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uGa-ho-BUn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="731" y="-489"/>
         </scene>
         <!--Request Payment-->
         <scene sceneID="Mhx-Om-AXg">
@@ -307,4 +362,8 @@
     <resources>
         <image name="Settings" width="25" height="25"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="vfq-nN-YA0"/>
+        <segue reference="twz-P5-jGH"/>
+    </inferredMetricsTieBreakers>
 </document>

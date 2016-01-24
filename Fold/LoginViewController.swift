@@ -12,7 +12,10 @@ class LoginViewController: UIViewController {
     
     private var client: Coinbase?
     private var accessToken: String?
+    private var refreshToken: String?
+    private var expiresIn: String?
     
+    @IBOutlet weak var loginButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +31,40 @@ class LoginViewController: UIViewController {
     
     }
     
-
+    @IBAction func authenticateLogin(sender: AnyObject) {
+        CoinbaseOAuth.startOAuthAuthenticationWithClientId(
+            CLIENT_ID,
+            scope: USER_SCOPE,
+            redirectUri: REDIRECT_URI,
+            meta: nil
+        )
+    }
+    
+    func authenticationSuccessful(response: NSDictionary) {
+        NSLog("Authentication successful! Tokens retrieved.")
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        
+        self.accessToken = response.objectForKey("access_token") as? String
+        self.refreshToken = response.objectForKey("refresh_token") as? String
+        self.expiresIn = response.objectForKey("expires_in") as? String
+        
+        userDefaults.setValue(accessToken, forKey: "access_token")
+        userDefaults.setValue(refreshToken, forKey: "refresh_token")
+        userDefaults.setValue(expiresIn, forKey: "expires_in")
+        
+        // TODO check if user or vendor
+        // for now assuming user
+        userDefaults.setValue(1, forKey: "is_logged_in")
+        userDefaults.setValue(1, forKey: "is_user")
+        userDefaults.setValue(0, forKey: "is_vendor")
+        
+        userDefaults.synchronize()
+        
+        self.performSegueWithIdentifier("userLoggedIn", sender: self)
+        
+        
+    }
+    
     /*
     // MARK: - Navigation
 

@@ -43,22 +43,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
         if url.scheme == "com.example.app.coinbase-oauth" {
-            CoinbaseOAuth.finishOAuthAuthenticationForUrl(url, clientId: "your client ID", clientSecret: "your client secret", completion: { (result : AnyObject?, error: NSError?) -> Void in
-                if error != nil {
+            CoinbaseOAuth.finishOAuthAuthenticationForUrl(url, clientId: CLIENT_ID, clientSecret: CLIENT_SECRET, completion: { (result : AnyObject?, error: NSError?) -> Void in
+                if let error = error {
                     // Could not authenticate.
+                    NSLog("Could not authenticate")
+                    let alert = UIAlertController(title: "OAuth Error", message: error.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.Default, handler: nil))
+                    self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
                 } else {
                     // Tokens successfully obtained!
                     // Do something with them (store them, etc.)
+                    NSLog("Tokens successfully obtained!")
                     if let result = result as? [String : AnyObject] {
                         NSLog(result.keys.joinWithSeparator(", "))
                         if let accessToken = result["access_token"] as? String {
                             NSLog("Access token %@", accessToken)
                         }
+                        if let refreshToken = result["refresh_token"] as? String {
+                            NSLog("Refresh token %@", refreshToken)
+                        }
                         if let expiresIn = result["expire_in"] as? String {
                             NSLog("Expires in %@", expiresIn)
                         }
+                        
+                        if let loginViewController = self.window?.rootViewController?.presentedViewController as? LoginViewController {
+                            loginViewController.authenticationSuccessful(result)
+                        }
+                        
                     }
-                    // Note that you should also store 'expire_in' and refresh the token using CoinbaseOAuth.getOAuthTokensForRefreshToken() when it expires
                 }
             })
             return true

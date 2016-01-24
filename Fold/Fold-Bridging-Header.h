@@ -6,3 +6,5 @@
 #import "CoinbaseOAuth.h"
 #import "CoinbaseCurrency.h"
 #import "CoinbaseBalance.h"
+#import "CoinbaseAccount.h"
+
