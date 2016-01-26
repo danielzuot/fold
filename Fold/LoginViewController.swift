@@ -11,6 +11,7 @@ import UIKit
 class LoginViewController: UIViewController {
     
     @IBOutlet weak var loginButton: UIButton!
+    private var isUser = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,11 +28,22 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func authenticateLogin(sender: AnyObject) {
+        self.isUser = true
         CoinbaseOAuth.startOAuthAuthenticationWithClientId(
             CLIENT_ID,
             scope: USER_SCOPE,
             redirectUri: REDIRECT_URI,
-            meta: nil
+            meta: USER_META
+        )
+    }
+    
+    @IBAction func authenticateVendorLogin(sender: AnyObject) {
+        self.isUser = false
+        CoinbaseOAuth.startOAuthAuthenticationWithClientId(
+            CLIENT_ID,
+            scope: VENDOR_SCOPE,
+            redirectUri: REDIRECT_URI,
+            meta: VENDOR_META
         )
     }
     
@@ -48,22 +60,21 @@ class LoginViewController: UIViewController {
             userDefaults.setValue(refreshToken, forKey: "refresh_token")
             userDefaults.setValue(expiresIn, forKey: "expires_in")
             
-            // TODO check if user or vendor
-            // for now assuming user
             userDefaults.setValue(1, forKey: "is_logged_in")
-            userDefaults.setValue(1, forKey: "is_user")
-            userDefaults.setValue(0, forKey: "is_vendor")
-            
-            userDefaults.synchronize()
-            
-            self.performSegueWithIdentifier("userLoggedIn", sender: self)
+            if (isUser) {
+                userDefaults.setValue(1, forKey: "is_user")
+                userDefaults.setValue(0, forKey: "is_vendor")
+                userDefaults.synchronize()
+                self.performSegueWithIdentifier("userLoggedIn", sender: self)
+            } else {
+                userDefaults.setValue(0, forKey: "is_user")
+                userDefaults.setValue(1, forKey: "is_vendor")
+                userDefaults.synchronize()
+                self.performSegueWithIdentifier("vendorLoggedIn", sender: self)
+            }
         } else {
             NSLog("Didn't recognize object")
         }
-        
-        
-        
-        
     }
     
     /*

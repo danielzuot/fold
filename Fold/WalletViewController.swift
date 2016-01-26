@@ -14,6 +14,7 @@ class WalletViewController: UIViewController {
     private var accessToken: String?
     
     @IBOutlet weak var balanceLabel: UILabel!
+    @IBOutlet weak var emailLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -38,6 +39,16 @@ class WalletViewController: UIViewController {
                             )
                         }
                     }
+                }
+            })
+            client?.getCurrentUser({ (user: CoinbaseUser!, error: NSError!) -> Void in
+                if let error = error {
+                    NSLog("Could not get current user")
+                    let alert = UIAlertController(title: "Current User Error", message: error.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.Default, handler: nil))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                } else {
+                    self.emailLabel.text = user.email
                 }
             })
         } else {
