@@ -17,7 +17,7 @@ class WalletViewController: UIViewController {
     @IBOutlet weak var emailLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        checkForRefreshToken()
         // Do any additional setup after loading the view.
         let userDefaults = NSUserDefaults.standardUserDefaults()
         if let currentAccessToken = userDefaults.stringForKey("access_token") {

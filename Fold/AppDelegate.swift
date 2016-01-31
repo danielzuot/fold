@@ -55,16 +55,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     // Do something with them (store them, etc.)
                     NSLog("Tokens successfully obtained!")
                     if let result = result as? [String : AnyObject] {
-                        NSLog(result.keys.joinWithSeparator(", "))
-                        if let accessToken = result["access_token"] as? String {
-                            NSLog("Access token %@", accessToken)
-                        }
-                        if let refreshToken = result["refresh_token"] as? String {
-                            NSLog("Refresh token %@", refreshToken)
-                        }
-                        if let expiresIn = result["expires_in"] as? Int {
-                            NSLog("Expires in \(expiresIn)")
-                        }
+                        let userDefaults = NSUserDefaults.standardUserDefaults()
+                        
+                        let accessToken = result["access_token"] as? String
+                        let refreshToken = result["refresh_token"] as? String
+                        let expiresIn = result["expires_in"] as? String
+                        
+                        userDefaults.setValue(accessToken, forKey: "access_token")
+                        userDefaults.setValue(refreshToken, forKey: "refresh_token")
+                        userDefaults.setValue(expiresIn, forKey: "expires_in")
+
                         NSNotificationCenter.defaultCenter().postNotificationName(AUTH_SUCCESS_NOTIFICATION, object: result)
                     }
                 }

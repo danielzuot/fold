@@ -96,13 +96,13 @@
 		8D25F5CD1C486B4D007851DD /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8D25F5D01C495838007851DD /* LoginViewController.swift */,
 				8D91714B1C458CFC008D8507 /* NavViewController.swift */,
 				8D25F5CB1C486B44007851DD /* WalletViewController.swift */,
-				8D25F5CE1C486BD5007851DD /* SettingsViewController.swift */,
-				8D25F5D01C495838007851DD /* LoginViewController.swift */,
 				8D25F5D21C496356007851DD /* StoreViewController.swift */,
 				8D0036AA1C4711FE008311A4 /* MPViewController.swift */,
 				8D25F5D41C49657E007851DD /* RPViewController.swift */,
+				8D25F5CE1C486BD5007851DD /* SettingsViewController.swift */,
 				8D91712B1C446297008D8507 /* Main.storyboard */,
 			);
 			name = Views;
