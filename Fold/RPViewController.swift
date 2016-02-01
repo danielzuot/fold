@@ -153,7 +153,13 @@ class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextFie
      */
     func peripheralManagerIsReadyToUpdateSubscribers(peripheral: CBPeripheralManager) {
         // Start sending again
-        //sendData()
+        if let vendorAddress = self.vendorAddress {
+            peripheralManager?.updateValue(
+                (vendorAddress as NSString).dataUsingEncoding(NSUTF8StringEncoding)!,
+                forCharacteristic: addressCharacteristic!,
+                onSubscribedCentrals: nil
+            )
+        }
     }
     
     /** This is called when a change happens, so we know to stop advertising
