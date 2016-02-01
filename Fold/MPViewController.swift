@@ -12,13 +12,14 @@ import CoreBluetooth
 class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDelegate {
     
     @IBOutlet weak var requestedAmountLabel: UILabel!
+    @IBOutlet weak var makePaymentButton: UIButton!
     
     private var centralManager: CBCentralManager?
     private var vendorPeripheral: CBPeripheral?
     
     // And somewhere to store the incoming data
-    private let data = NSMutableData()
     private var priceReceived: String?
+    private var vendorAddress: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +28,24 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
         centralManager = CBCentralManager(delegate: self, queue: nil)
     }
     
+    @IBAction func makePaymentTapped(sender: AnyObject) {
+        NSLog("Creating confirmation alert")
+        let alert = UIAlertController(
+            title: "Payment Confirmation",
+            message: String(format: "%@%@%@%@","Sending $", self.priceReceived!, " to vendor address: ", self.vendorAddress!),
+            preferredStyle: UIAlertControllerStyle.ActionSheet
+        )
+        alert.addAction(UIAlertAction(title: "Confirm", style: UIAlertActionStyle.Default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            NSLog("Okay I want to pay")
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            NSLog("Cancelled")
+        }))
+        self.presentViewController(alert, animated: true, completion: nil)
+
+    }
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         
@@ -104,9 +123,6 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
         centralManager?.stopScan()
         print("Scanning stopped")
         
-        // Clear the data that we may already have
-        data.length = 0
-        
         // Make sure we get the discovery callbacks
         peripheral.delegate = self
         
@@ -161,8 +177,23 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
             return
         }
         
-        priceReceived = NSString(data: characteristic.value!, encoding: NSUTF8StringEncoding) as? String
-        requestedAmountLabel.text = priceReceived
+        if (characteristic.UUID.isEqual(amountUUID)) {
+            priceReceived = NSString(data: characteristic.value!, encoding: NSUTF8StringEncoding) as? String
+            requestedAmountLabel.text = priceReceived
+        } else if (characteristic.UUID.isEqual(addressUUID)) {
+            vendorAddress = NSString(data: characteristic.value!, encoding: NSUTF8StringEncoding) as? String
+            NSLog(vendorAddress!)
+        }
+        
+        if priceReceived != nil {
+            if vendorAddress != nil {
+                makePaymentButton.enabled = true
+                makePaymentButton.alpha = 1.0
+                return
+            }
+        }
+        makePaymentButton.enabled = false
+        makePaymentButton.alpha = 0.4
     }
     
     /** The peripheral letting us know whether our subscribe/unsubscribe happened or not

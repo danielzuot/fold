@@ -111,17 +111,30 @@ class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextFie
         
         // TODO Generate an order and then get the amount and address
         priceToSend = priceText.text!
-        /*client..create
-            name: "test",
-            price: priceToSend,
-            priceCurrencyISO: "USD"
-        )
+        client?.createBitcoinAddress(
+            {(cbaddress: CoinbaseAddress?, error: NSError?) -> Void in
+                if let error = error {
+                    NSLog("Could not generate new receipt address.")
+                    let alert = UIAlertController(title: "New Address Error", message: error.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.Default, handler: nil))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                }
+                if let cbaddress = cbaddress {
+                    self.orderAddress = cbaddress.addressID
+                }
+        })
         
         peripheralManager?.updateValue(
             (priceToSend! as NSString).dataUsingEncoding(NSUTF8StringEncoding)!,
-            forCharacteristic: transferCharacteristic!,
+            forCharacteristic: amountCharacteristic!,
             onSubscribedCentrals: nil
-        )*/
+        )
+        
+        peripheralManager?.updateValue(
+            (orderAddress! as NSString).dataUsingEncoding(NSUTF8StringEncoding)!,
+            forCharacteristic: addressCharacteristic!,
+            onSubscribedCentrals: nil
+        )
     }
     
     /** Recognise when the central unsubscribes
