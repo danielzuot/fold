@@ -194,7 +194,7 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
                 NSLog("Creating confirmation alert")
                 let alert = UIAlertController(
                     title: "Payment Confirmation",
-                    message: String(format: "%@%@%@%@","Sending $", self.priceReceived!, " to vendor address: ", self.vendorAddress!),
+                    message: String(format: "%@%@%@%@","Sending ", self.priceReceived!, "BTC to vendor address: ", self.vendorAddress!),
                     preferredStyle: UIAlertControllerStyle.ActionSheet
                 )
                 alert.addAction(UIAlertAction(
@@ -204,20 +204,14 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
                         NSLog("Sending payment...")
                         self.primaryAccount?.sendAmount(
                             self.priceReceived,
-                            amountCurrencyISO: Currencies.US_DOLLARS.rawValue,
-                            to: "",
-                            notes: "testing",
-                            userFee: "",
-                            referrerID: "",
-                            idem: "",
-                            instantBuy: false,
-                            orderID: "",
+                            to: self.vendorAddress,
                             completion: {(transaction: CoinbaseTransaction?, error: NSError?) -> Void in
                                 if let error = error {
                                     NSLog("Payment failed %@.", error.localizedDescription)
+                                } else {
+                                    NSLog("PAYMENT COMPLETE")
+                                    self.performSegueWithIdentifier("paymentComplete", sender: self)
                                 }
-                                NSLog("PAYMENT COMPLETE")
-                                self.performSegueWithIdentifier("paymentComplete", sender: self)
                             })
                         NSLog("After the payment")
 

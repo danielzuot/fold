@@ -157,8 +157,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Requested amount:   $" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="idL-s4-eQW">
-                                <rect key="frame" x="169" y="83" width="173" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Requested amount:   " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="idL-s4-eQW">
+                                <rect key="frame" x="179" y="83" width="163" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -179,13 +179,21 @@
                                     <action selector="makePaymentTapped:" destination="bLx-8o-Ycx" eventType="touchUpInside" id="x4X-Zj-90k"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="BTC" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jEE-XW-EGU">
+                                <rect key="frame" x="398" y="83" width="33" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="kgX-Z3-cNb" firstAttribute="centerX" secondItem="Pj3-MH-rFM" secondAttribute="centerX" id="3fl-Y8-CSZ"/>
                             <constraint firstItem="kgX-Z3-cNb" firstAttribute="top" secondItem="idL-s4-eQW" secondAttribute="bottom" constant="26" id="7HS-Z8-sUk"/>
                             <constraint firstItem="idL-s4-eQW" firstAttribute="top" secondItem="TfS-QV-5Xk" secondAttribute="bottom" constant="19" id="D2A-SY-DwL"/>
+                            <constraint firstItem="jEE-XW-EGU" firstAttribute="leading" secondItem="X3k-Ox-f3c" secondAttribute="trailing" constant="13" id="FdY-2J-fMq"/>
                             <constraint firstItem="X3k-Ox-f3c" firstAttribute="leading" secondItem="idL-s4-eQW" secondAttribute="trailing" constant="8" id="Zpi-nw-vWu"/>
+                            <constraint firstItem="jEE-XW-EGU" firstAttribute="top" secondItem="TfS-QV-5Xk" secondAttribute="bottom" constant="19" id="cT6-4J-Iej"/>
                             <constraint firstItem="X3k-Ox-f3c" firstAttribute="top" secondItem="TfS-QV-5Xk" secondAttribute="bottom" constant="19" id="kZ3-G9-6bs"/>
                             <constraint firstItem="idL-s4-eQW" firstAttribute="centerX" secondItem="Pj3-MH-rFM" secondAttribute="centerX" id="qvw-01-5Fv"/>
                         </constraints>
