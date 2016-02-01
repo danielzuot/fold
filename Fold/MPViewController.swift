@@ -213,7 +213,7 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
                                     self.performSegueWithIdentifier("paymentComplete", sender: self)
                                 }
                             })
-                        NSLog("After the payment")
+                        self.performSegueWithIdentifier("paymentComplete", sender: self)
 
                 }))
                 alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: {
