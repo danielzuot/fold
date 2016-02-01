@@ -11,7 +11,6 @@ import UIKit
 class WalletViewController: UIViewController {
 
     private var client: Coinbase?
-    private var accessToken: String?
     
     @IBOutlet weak var balanceLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
@@ -21,7 +20,6 @@ class WalletViewController: UIViewController {
         // Do any additional setup after loading the view.
         let userDefaults = NSUserDefaults.standardUserDefaults()
         if let currentAccessToken = userDefaults.stringForKey("access_token") {
-            self.accessToken = currentAccessToken
             self.client = Coinbase(OAuthAccessToken: currentAccessToken)
             
             client?.getAccountsList({ (accounts: [AnyObject]!, paging: CoinbasePagingHelper!, error: NSError!) -> Void in
