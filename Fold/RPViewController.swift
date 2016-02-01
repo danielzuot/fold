@@ -121,7 +121,7 @@ class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextFie
                     self.presentViewController(alert, animated: true, completion: nil)
                 }
                 if let cbaddress = cbaddress {
-                    self.vendorAddress = cbaddress.addressID
+                    self.vendorAddress = cbaddress.address
                     self.peripheralManager?.updateValue(
                         (self.vendorAddress! as NSString).dataUsingEncoding(NSUTF8StringEncoding)!,
                         forCharacteristic: self.addressCharacteristic!,
@@ -150,13 +150,6 @@ class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextFie
      */
     func peripheralManagerIsReadyToUpdateSubscribers(peripheral: CBPeripheralManager) {
         // Start sending again
-        if let vendorAddress = self.vendorAddress {
-            peripheralManager?.updateValue(
-                (vendorAddress as NSString).dataUsingEncoding(NSUTF8StringEncoding)!,
-                forCharacteristic: addressCharacteristic!,
-                onSubscribedCentrals: nil
-            )
-        }
     }
     
     /** This is called when a change happens, so we know to stop advertising
