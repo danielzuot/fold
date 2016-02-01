@@ -20,6 +20,7 @@ class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextFie
     
     private var priceToSend: String?
     private var vendorAddress: String?
+    private var updatedAddress = false
     private var client: Coinbase?
     
     override func viewDidLoad() {
@@ -121,6 +122,11 @@ class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextFie
                 }
                 if let cbaddress = cbaddress {
                     self.vendorAddress = cbaddress.addressID
+                    self.peripheralManager?.updateValue(
+                        (self.vendorAddress! as NSString).dataUsingEncoding(NSUTF8StringEncoding)!,
+                        forCharacteristic: self.addressCharacteristic!,
+                        onSubscribedCentrals: nil
+                    )
                 }
         })
         
@@ -131,15 +137,6 @@ class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextFie
                 onSubscribedCentrals: nil
             )
         }
-        
-        if let vendorAddress = self.vendorAddress {
-            peripheralManager?.updateValue(
-                (vendorAddress as NSString).dataUsingEncoding(NSUTF8StringEncoding)!,
-                forCharacteristic: addressCharacteristic!,
-                onSubscribedCentrals: nil
-            )
-        }
-        
     }
     
     /** Recognise when the central unsubscribes
