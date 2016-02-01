@@ -17,8 +17,8 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
     private var vendorPeripheral: CBPeripheral?
     
     // And somewhere to store the incoming data
-    private let data = NSMutableData()
     private var priceReceived: String?
+    private var vendorAddress: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -104,9 +104,6 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
         centralManager?.stopScan()
         print("Scanning stopped")
         
-        // Clear the data that we may already have
-        data.length = 0
-        
         // Make sure we get the discovery callbacks
         peripheral.delegate = self
         
@@ -161,8 +158,14 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
             return
         }
         
-        priceReceived = NSString(data: characteristic.value!, encoding: NSUTF8StringEncoding) as? String
-        requestedAmountLabel.text = priceReceived
+        if (characteristic.UUID.isEqual(amountUUID)) {
+            priceReceived = NSString(data: characteristic.value!, encoding: NSUTF8StringEncoding) as? String
+            requestedAmountLabel.text = priceReceived
+        } else if (characteristic.UUID.isEqual(addressUUID)) {
+            vendorAddress = NSString(data: characteristic.value!, encoding: NSUTF8StringEncoding) as? String
+            NSLog(vendorAddress!)
+        }
+        
     }
     
     /** The peripheral letting us know whether our subscribe/unsubscribe happened or not
