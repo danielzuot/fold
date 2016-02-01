@@ -31,12 +31,20 @@ class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextFie
         peripheralManager = CBPeripheralManager(delegate: self, queue: nil)
         self.priceText.delegate = self
         
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        view.addGestureRecognizer(tap)
+        
         // Load Coinbase client
         checkForRefreshToken()
         let userDefaults = NSUserDefaults.standardUserDefaults()
         if let currentAccessToken = userDefaults.stringForKey("access_token") {
             self.client = Coinbase(OAuthAccessToken: currentAccessToken)
         }
+    }
+    
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
     }
     
     override func viewDidDisappear(animated: Bool) {
