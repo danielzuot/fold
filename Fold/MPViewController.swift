@@ -17,7 +17,8 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
     private var centralManager: CBCentralManager?
     private var vendorPeripheral: CBPeripheral?
     
-    // And somewhere to store the incoming data
+    private var client: Coinbase?
+    private var primaryAccount: CoinbaseAccount?
     private var priceReceived: String?
     private var vendorAddress: String?
     
@@ -26,26 +27,28 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
         
         // Start up the CBCentralManager
         centralManager = CBCentralManager(delegate: self, queue: nil)
+        checkForRefreshToken()
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        if let currentAccessToken = userDefaults.stringForKey("access_token") {
+            self.client = Coinbase(OAuthAccessToken: currentAccessToken)
+            client?.getAccountsList({ (accounts: [AnyObject]!, paging: CoinbasePagingHelper!, error: NSError!) -> Void in
+                if let error = error {
+                    NSLog("Could not get accounts list")
+                    let alert = UIAlertController(title: "Accounts List Error", message: error.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.Default, handler: nil))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                } else {
+                    for primaryAccount in accounts as! [CoinbaseAccount]{
+                        if (primaryAccount.primary) {
+                            self.primaryAccount = primaryAccount
+                        }
+                    }
+                }
+            })
+        }
     }
     
-    @IBAction func makePaymentTapped(sender: AnyObject) {
-        NSLog("Creating confirmation alert")
-        let alert = UIAlertController(
-            title: "Payment Confirmation",
-            message: String(format: "%@%@%@%@","Sending $", self.priceReceived!, " to vendor address: ", self.vendorAddress!),
-            preferredStyle: UIAlertControllerStyle.ActionSheet
-        )
-        alert.addAction(UIAlertAction(title: "Confirm", style: UIAlertActionStyle.Default, handler: {
-            (alert: UIAlertAction!) -> Void in
-            NSLog("Okay I want to pay")
-        }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: {
-            (alert: UIAlertAction!) -> Void in
-            NSLog("Cancelled")
-        }))
-        self.presentViewController(alert, animated: true, completion: nil)
 
-    }
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         
@@ -187,13 +190,27 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
         
         if priceReceived != nil {
             if vendorAddress != nil {
-                makePaymentButton.enabled = true
-                makePaymentButton.alpha = 1.0
-                return
+                NSLog("Creating confirmation alert")
+                let alert = UIAlertController(
+                    title: "Payment Confirmation",
+                    message: String(format: "%@%@%@%@","Sending $", self.priceReceived!, " to vendor address: ", self.vendorAddress!),
+                    preferredStyle: UIAlertControllerStyle.ActionSheet
+                )
+                alert.addAction(UIAlertAction(title: "Confirm", style: UIAlertActionStyle.Default, handler: {
+                    (alert: UIAlertAction!) -> Void in
+                        self.primaryAccount?.sendAmount(self.priceReceived, amountCurrencyISO: Currencies.US_DOLLARS.rawValue, to: self.vendorAddress, notes: "testing", userFee: nil, referrerID: nil, idem: nil, instantBuy: false, orderID: nil, completion: {
+                            (transaction: CoinbaseTransaction?, error: NSError?) -> Void in
+                                NSLog("PAYMENT COMPLETE")
+                                self.performSegueWithIdentifier("paymentComplete", sender: self)
+                    })
+                }))
+                alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: {
+                    (alert: UIAlertAction!) -> Void in
+                    NSLog("Cancelled")
+                }))
+                self.presentViewController(alert, animated: true, completion: nil)
             }
         }
-        makePaymentButton.enabled = false
-        makePaymentButton.alpha = 0.4
     }
     
     /** The peripheral letting us know whether our subscribe/unsubscribe happened or not
