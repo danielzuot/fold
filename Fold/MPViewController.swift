@@ -198,6 +198,7 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
                 )
                 alert.addAction(UIAlertAction(title: "Confirm", style: UIAlertActionStyle.Default, handler: {
                     (alert: UIAlertAction!) -> Void in
+                        NSLog("Sending payment...")
                         self.primaryAccount?.sendAmount(self.priceReceived, amountCurrencyISO: Currencies.US_DOLLARS.rawValue, to: self.vendorAddress, notes: "testing", userFee: nil, referrerID: nil, idem: nil, instantBuy: false, orderID: nil, completion: {
                             (transaction: CoinbaseTransaction?, error: NSError?) -> Void in
                             if let error = error {
