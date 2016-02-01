@@ -163,12 +163,21 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jEE-XW-EGU">
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="bvf-Ie-c4b">
                                 <rect key="frame" x="345" y="276" width="81" height="48"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="USD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jEE-XW-EGU">
+                                        <rect key="frame" x="0.0" y="0.0" width="81" height="48"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="Kju-3q-kHi"/>
+                                    <constraint firstAttribute="width" constant="81" id="NKx-Tk-sVU"/>
+                                </constraints>
+                            </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Requested amount:   " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="idL-s4-eQW">
                                 <rect key="frame" x="187" y="158" width="227" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
@@ -178,14 +187,11 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="jEE-XW-EGU" firstAttribute="centerY" secondItem="X3k-Ox-f3c" secondAttribute="centerY" id="BG9-y3-WoJ"/>
                             <constraint firstItem="idL-s4-eQW" firstAttribute="top" secondItem="TfS-QV-5Xk" secondAttribute="bottom" constant="94" id="D2A-SY-DwL"/>
                             <constraint firstItem="X3k-Ox-f3c" firstAttribute="top" secondItem="TfS-QV-5Xk" secondAttribute="bottom" constant="175" id="Fl2-fv-Ll7"/>
                             <constraint firstItem="X3k-Ox-f3c" firstAttribute="centerY" secondItem="Pj3-MH-rFM" secondAttribute="centerY" id="TMj-uR-PcX"/>
-                            <constraint firstItem="jEE-XW-EGU" firstAttribute="top" secondItem="TfS-QV-5Xk" secondAttribute="bottom" constant="212" id="gax-uj-oU1"/>
                             <constraint firstItem="idL-s4-eQW" firstAttribute="centerX" secondItem="Pj3-MH-rFM" secondAttribute="centerX" id="qvw-01-5Fv"/>
                             <constraint firstItem="X3k-Ox-f3c" firstAttribute="centerX" secondItem="Pj3-MH-rFM" secondAttribute="centerX" constant="-43.5" id="s4c-Il-9Xb"/>
-                            <constraint firstItem="jEE-XW-EGU" firstAttribute="leading" secondItem="X3k-Ox-f3c" secondAttribute="trailing" constant="16" id="y9Y-8P-MNV"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Make Payment" id="dND-u7-Pzw"/>
