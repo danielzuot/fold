@@ -59,12 +59,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         
                         let accessToken = result["access_token"] as? String
                         let refreshToken = result["refresh_token"] as? String
-                        let expiresIn = result["expires_in"] as? String
+                        let expiresIn = result["expires_in"] as? Int
                         
                         userDefaults.setValue(accessToken, forKey: "access_token")
                         userDefaults.setValue(refreshToken, forKey: "refresh_token")
-                        userDefaults.setValue(expiresIn, forKey: "expires_in")
-                        userDefaults.setValue(NSDate().timeIntervalSince1970, forKey: "start_time")
+                        userDefaults.setInteger(expiresIn!, forKey: "expires_in")
+                        userDefaults.setDouble(NSDate().timeIntervalSince1970, forKey: "start_time")
                         
                         NSNotificationCenter.defaultCenter().postNotificationName(AUTH_SUCCESS_NOTIFICATION, object: result)
                     }
