@@ -49,6 +49,7 @@ class WalletViewController: UIViewController {
                     self.emailLabel.text = user.email
                 }
             })
+            
         } else {
             NSLog("ERROR: reached wallet without valid access token")
         }

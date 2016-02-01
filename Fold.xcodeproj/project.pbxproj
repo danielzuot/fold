@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		44E5EC791C5F295F00AA4514 /* TransactionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E5EC781C5F295F00AA4514 /* TransactionTableViewController.swift */; };
 		8D0036A91C459288008311A4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D0036A81C459288008311A4 /* Images.xcassets */; };
 		8D0036AB1C4711FE008311A4 /* MPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0036AA1C4711FE008311A4 /* MPViewController.swift */; };
 		8D25F5CC1C486B44007851DD /* WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D25F5CB1C486B44007851DD /* WalletViewController.swift */; };
@@ -39,6 +40,7 @@
 /* Begin PBXFileReference section */
 		0E7A12061CF4DC960C062FF5 /* Pods-Fold.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fold.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fold/Pods-Fold.debug.xcconfig"; sourceTree = "<group>"; };
 		12906F27A54469C73CB96F7E /* Pods-Fold.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fold.release.xcconfig"; path = "Pods/Target Support Files/Pods-Fold/Pods-Fold.release.xcconfig"; sourceTree = "<group>"; };
+		44E5EC781C5F295F00AA4514 /* TransactionTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionTableViewController.swift; sourceTree = "<group>"; };
 		63FCBB29B2C4F82971CD64E5 /* libPods-Fold.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Fold.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D0036A81C459288008311A4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8D0036AA1C4711FE008311A4 /* MPViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPViewController.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 				8D25F5D01C495838007851DD /* LoginViewController.swift */,
 				8D91714B1C458CFC008D8507 /* NavViewController.swift */,
 				8D25F5CB1C486B44007851DD /* WalletViewController.swift */,
+				44E5EC781C5F295F00AA4514 /* TransactionTableViewController.swift */,
 				8D25F5D21C496356007851DD /* StoreViewController.swift */,
 				8D0036AA1C4711FE008311A4 /* MPViewController.swift */,
 				8D25F5D41C49657E007851DD /* RPViewController.swift */,
@@ -223,7 +226,7 @@
 				TargetAttributes = {
 					8D9171231C446297008D8507 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = V982QTRSN7;
+						DevelopmentTeam = W97E5V9FW6;
 					};
 					8D9171371C446298008D8507 = {
 						CreatedOnToolsVersion = 7.2;
@@ -331,6 +334,7 @@
 				8D25F5CF1C486BD5007851DD /* SettingsViewController.swift in Sources */,
 				8D0036AB1C4711FE008311A4 /* MPViewController.swift in Sources */,
 				8DB7BC201C4F18F4009FBE7E /* Fold.xcdatamodeld in Sources */,
+				44E5EC791C5F295F00AA4514 /* TransactionTableViewController.swift in Sources */,
 				8D25F5D31C496356007851DD /* StoreViewController.swift in Sources */,
 				8D4150A91C4C893500CD5E7D /* Constants.swift in Sources */,
 			);
@@ -464,7 +468,7 @@
 				INFOPLIST_FILE = Fold/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.fold.dzuo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fold.ddoan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Fold/Fold-Bridging-Header.h";
@@ -483,7 +487,7 @@
 				INFOPLIST_FILE = Fold/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.fold.dzuo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fold.ddoan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Fold/Fold-Bridging-Header.h";
