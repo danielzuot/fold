@@ -24,10 +24,10 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>com.fold.app.coinbase-oath</string>
+			<string>com.fold.app.coinbase-oauth</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.fold.app.coinbase-oath</string>
+				<string>com.fold.app.coinbase-oauth</string>
 			</array>
 		</dict>
 	</array>

@@ -42,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
-        if url.scheme == "com.fold.app.coinbase-oath" {
+        if url.scheme == "com.fold.app.coinbase-oauth" {
             CoinbaseOAuth.finishOAuthAuthenticationForUrl(url, clientId: CLIENT_ID, clientSecret: CLIENT_SECRET, completion: { (result : AnyObject?, error: NSError?) -> Void in
                 if let error = error {
                     // Could not authenticate.
