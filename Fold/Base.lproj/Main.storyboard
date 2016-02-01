@@ -256,7 +256,7 @@
                     <nil name="viewControllers"/>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="userAlreadyLoggedIn" id="HLQ-Lw-IfQ"/>
-                        <segue destination="Kma-55-N8I" kind="show" identifier="vendorLoggedIn" id="MEZ-XW-h4E"/>
+                        <segue destination="Kma-55-N8I" kind="show" identifier="vendorAlreadyLoggedIn" id="MEZ-XW-h4E"/>
                         <segue destination="DKf-eN-jQC" kind="show" identifier="notLoggedIn" id="IUz-WD-qSw"/>
                     </connections>
                 </navigationController>
@@ -427,7 +427,7 @@
         <image name="Settings" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="vfq-nN-YA0"/>
-        <segue reference="twz-P5-jGH"/>
+        <segue reference="HLQ-Lw-IfQ"/>
+        <segue reference="MEZ-XW-h4E"/>
     </inferredMetricsTieBreakers>
 </document>
