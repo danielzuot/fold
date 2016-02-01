@@ -215,9 +215,6 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
                             completion: {(transaction: CoinbaseTransaction?, error: NSError?) -> Void in
                                 if let error = error {
                                     NSLog("Payment failed %@.", error.localizedDescription)
-                                    let alert = UIAlertController(title: "Payment Error", message: error.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
-                                    alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
-                                    self.presentViewController(alert, animated: true, completion: nil)
                                 }
                                 NSLog("PAYMENT COMPLETE")
                                 self.performSegueWithIdentifier("paymentComplete", sender: self)
