@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="UIW-sE-NNM">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--My Wallet-->
@@ -58,25 +59,25 @@
                                     <segue destination="MnT-hG-GNR" kind="show" id="ZDD-ZC-3kJ"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Balance:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HBV-v5-kt5">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Balance:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HBV-v5-kt5">
                                 <rect key="frame" x="399" y="88" width="66" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Email:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ws5-Mx-6Q4">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Email:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ws5-Mx-6Q4">
                                 <rect key="frame" x="419" y="117" width="46" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0.00 BTC" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JFU-CJ-Vpj">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="0.00 BTC" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JFU-CJ-Vpj">
                                 <rect key="frame" x="484" y="88" width="72" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="none" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HZc-I4-hv1">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="none" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HZc-I4-hv1">
                                 <rect key="frame" x="484" y="117" width="72" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -86,11 +87,17 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="wxz-vy-pjb" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3uH-Zj-pUS"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="JFU-CJ-Vpj" secondAttribute="trailing" constant="24" id="AUG-pC-duc"/>
                             <constraint firstItem="wxz-vy-pjb" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="184" id="CAA-cz-GoS"/>
+                            <constraint firstItem="HZc-I4-hv1" firstAttribute="top" secondItem="JFU-CJ-Vpj" secondAttribute="bottom" constant="8" id="GbE-fE-fOQ"/>
                             <constraint firstItem="RpQ-QZ-sJ8" firstAttribute="top" secondItem="pTO-ih-rXE" secondAttribute="bottom" constant="18" id="H28-1f-TAP"/>
                             <constraint firstItem="pTO-ih-rXE" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="OQQ-gv-Leh"/>
                             <constraint firstItem="pTO-ih-rXE" firstAttribute="top" secondItem="wxz-vy-pjb" secondAttribute="bottom" constant="20" id="XIP-zn-dpC"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="HZc-I4-hv1" secondAttribute="trailing" constant="24" id="YZl-A4-dIm"/>
+                            <constraint firstItem="JFU-CJ-Vpj" firstAttribute="leading" secondItem="HBV-v5-kt5" secondAttribute="trailing" constant="19" id="aAx-fQ-d54"/>
+                            <constraint firstItem="ws5-Mx-6Q4" firstAttribute="top" secondItem="HBV-v5-kt5" secondAttribute="bottom" constant="8" id="e3w-Xj-2rh"/>
                             <constraint firstItem="RpQ-QZ-sJ8" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fbb-C6-en3"/>
+                            <constraint firstItem="HZc-I4-hv1" firstAttribute="leading" secondItem="ws5-Mx-6Q4" secondAttribute="trailing" constant="19" id="yrA-TR-KOv"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="My Wallet" id="hEQ-nE-xaK">
