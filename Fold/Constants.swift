@@ -33,15 +33,16 @@ let USER_META = ["send_limit_amount": "50", "send_limit_currency": "USD", "send_
 let VENDOR_META = ["send_limit_amount": "50", "send_limit_currency": "USD", "send_limit_period": "day"]
 let REDIRECT_URI = "com.fold.app.coinbase-oath://coinbase-oauth"
 let AUTH_SUCCESS_NOTIFICATION = "com.fold.app.coinbase-oauth.success"
-
+let REFRESH_TIME_BUFFER = 300
 
 func checkForRefreshToken(){
     let userDefaults = NSUserDefaults.standardUserDefaults()
-    if let expiresIn = userDefaults.stringForKey("expires_in") {
+    if let expiresIn = userDefaults.stringForKey("expires_in") as {
         if let startTime = userDefaults.stringForKey("start_time") {
             if let refreshToken = userDefaults.stringForKey("refresh_token") {
                 let currentTime = NSDate().timeIntervalSince1970
-                if (currentTime - startTime! < expiresIn! - 300) {
+                let timeElapsed = currentTime - startTime
+                if (timeElapsed + REFRESH_TIME_BUFFER > expiresIn) {
                     CoinbaseOAuth.getOAuthTokensForRefreshToken(refreshToken , clientId: CLIENT_ID, clientSecret: CLIENT_SECRET, completion: { (result : AnyObject?, error: NSError?) -> Void in
                     })
                 }
