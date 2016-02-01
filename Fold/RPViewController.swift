@@ -19,7 +19,7 @@ class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextFie
     private var addressCharacteristic: CBMutableCharacteristic?
     
     private var priceToSend: String?
-    private var orderAddress: String?
+    private var vendorAddress: String?
     private var client: Coinbase?
     
     override func viewDidLoad() {
@@ -120,21 +120,26 @@ class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextFie
                     self.presentViewController(alert, animated: true, completion: nil)
                 }
                 if let cbaddress = cbaddress {
-                    self.orderAddress = cbaddress.addressID
+                    self.vendorAddress = cbaddress.addressID
                 }
         })
         
-        peripheralManager?.updateValue(
-            (priceToSend! as NSString).dataUsingEncoding(NSUTF8StringEncoding)!,
-            forCharacteristic: amountCharacteristic!,
-            onSubscribedCentrals: nil
-        )
+        if let priceToSend = self.priceToSend {
+            peripheralManager?.updateValue(
+                (priceToSend as NSString).dataUsingEncoding(NSUTF8StringEncoding)!,
+                forCharacteristic: amountCharacteristic!,
+                onSubscribedCentrals: nil
+            )
+        }
         
-        peripheralManager?.updateValue(
-            (orderAddress! as NSString).dataUsingEncoding(NSUTF8StringEncoding)!,
-            forCharacteristic: addressCharacteristic!,
-            onSubscribedCentrals: nil
-        )
+        if let vendorAddress = self.vendorAddress {
+            peripheralManager?.updateValue(
+                (vendorAddress as NSString).dataUsingEncoding(NSUTF8StringEncoding)!,
+                forCharacteristic: addressCharacteristic!,
+                onSubscribedCentrals: nil
+            )
+        }
+        
     }
     
     /** Recognise when the central unsubscribes
