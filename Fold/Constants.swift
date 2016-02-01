@@ -35,9 +35,11 @@ let AUTH_SUCCESS_NOTIFICATION = "com.fold.app.coinbase-oauth.success"
 
 func checkForRefreshToken(){
     let userDefaults = NSUserDefaults.standardUserDefaults()
-    let expiresIn: Int? = Int(userDefaults.stringForKey("expires_in")!)
-    let refreshToken = userDefaults.stringForKey("refresh_token");
-    if (expiresIn < 10) {
+    let expiresIn: Double? = Double(userDefaults.stringForKey("expires_in")!)
+    let startTime: Double? = Double(userDefaults.stringForKey("start_time")!)
+    let refreshToken = userDefaults.stringForKey("refresh_token")
+    let currentTime = NSDate().timeIntervalSince1970
+    if (currentTime - startTime! < expiresIn! - 300) {
         CoinbaseOAuth.getOAuthTokensForRefreshToken(refreshToken , clientId: CLIENT_ID, clientSecret: CLIENT_SECRET, completion: { (result : AnyObject?, error: NSError?) -> Void in
         })
     }

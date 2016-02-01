@@ -64,7 +64,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         userDefaults.setValue(accessToken, forKey: "access_token")
                         userDefaults.setValue(refreshToken, forKey: "refresh_token")
                         userDefaults.setValue(expiresIn, forKey: "expires_in")
-
+                        userDefaults.setValue(NSDate().timeIntervalSince1970, forKey: "start_time")
+                        
                         NSNotificationCenter.defaultCenter().postNotificationName(AUTH_SUCCESS_NOTIFICATION, object: result)
                     }
                 }

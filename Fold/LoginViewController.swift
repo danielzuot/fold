@@ -51,7 +51,6 @@ class LoginViewController: UIViewController {
         NSLog("Notification received: Authentication successful! Tokens retrieved.")
         if let response = notification.object as? [String : AnyObject] {
             let userDefaults = NSUserDefaults.standardUserDefaults()
-            c
             userDefaults.setValue(1, forKey: "is_logged_in")
             if (isUser) {
                 userDefaults.setValue(1, forKey: "is_user")
