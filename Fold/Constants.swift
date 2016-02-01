@@ -41,7 +41,8 @@ let USER_SCOPE = "merchant balance addresses buttons buy contacts orders sell tr
 let VENDOR_SCOPE = "merchant balance addresses buttons buy contacts orders sell transactions send request transfer transfers user recurring_payments oauth_apps reports deposit withdraw"
 let USER_META = ["send_limit_amount": "50", "send_limit_currency": "USD", "send_limit_period": "day"]
 let VENDOR_META = ["send_limit_amount": "50", "send_limit_currency": "USD", "send_limit_period": "day"]
-let REDIRECT_URI = "com.fold.app.coinbase-oauth://coinbase-oauth"
+let URL_SCHEME = "com.fold.app.coinbase-oauth"
+let REDIRECT_URI = URL_SCHEME + "://coinbase-oauth"
 let AUTH_SUCCESS_NOTIFICATION = "com.fold.app.coinbase-oauth.success"
 let REFRESH_TIME_BUFFER = 300.0
 
