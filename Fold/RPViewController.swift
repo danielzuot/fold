@@ -111,7 +111,7 @@ class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextFie
         
         // TODO Generate an order and then get the amount and address
         priceToSend = priceText.text!
-        client?.createOrderWithName(
+        /*client..create
             name: "test",
             price: priceToSend,
             priceCurrencyISO: "USD"
@@ -121,7 +121,7 @@ class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextFie
             (priceToSend! as NSString).dataUsingEncoding(NSUTF8StringEncoding)!,
             forCharacteristic: transferCharacteristic!,
             onSubscribedCentrals: nil
-        )
+        )*/
     }
     
     /** Recognise when the central unsubscribes

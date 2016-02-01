@@ -127,7 +127,7 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
         
         // Loop through the newly filled peripheral.services array, just in case there's more than one.
         for service in peripheral.services as [CBService]! {
-            peripheral.discoverCharacteristics([characteristicUUID], forService: service)
+            peripheral.discoverCharacteristics([amountUUID, addressUUID], forService: service)
         }
     }
     
@@ -145,7 +145,7 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
         // Again, we loop through the array, just in case.
         for characteristic in service.characteristics as [CBCharacteristic]! {
             // And check if it's the right one
-            if characteristic.UUID.isEqual(characteristicUUID) {
+            if characteristic.UUID.isEqual(amountUUID) || characteristic.UUID.isEqual(addressUUID) {
                 // If it is, subscribe to it
                 peripheral.setNotifyValue(true, forCharacteristic: characteristic)
             }
@@ -173,7 +173,7 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
         }
         
         // Exit if it's not the transfer characteristic
-        if !characteristic.UUID.isEqual(characteristicUUID) {
+        if !(characteristic.UUID.isEqual(addressUUID) || characteristic.UUID.isEqual(amountUUID)){
             return
         }
         
@@ -212,7 +212,7 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
             for service in services {
                 if let characteristics = service.characteristics as [CBCharacteristic]? {
                     for characteristic in characteristics {
-                        if characteristic.UUID.isEqual(characteristicUUID) && characteristic.isNotifying {
+                        if (characteristic.UUID.isEqual(amountUUID) || characteristic.UUID.isEqual(addressUUID)) && characteristic.isNotifying {
                             vendorPeripheral?.setNotifyValue(false, forCharacteristic: characteristic)
                             // And we're done.
                             return
