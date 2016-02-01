@@ -200,8 +200,15 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
                     (alert: UIAlertAction!) -> Void in
                         self.primaryAccount?.sendAmount(self.priceReceived, amountCurrencyISO: Currencies.US_DOLLARS.rawValue, to: self.vendorAddress, notes: "testing", userFee: nil, referrerID: nil, idem: nil, instantBuy: false, orderID: nil, completion: {
                             (transaction: CoinbaseTransaction?, error: NSError?) -> Void in
-                                NSLog("PAYMENT COMPLETE")
-                                self.performSegueWithIdentifier("paymentComplete", sender: self)
+                            if let error = error {
+                                NSLog("Payment failed %@.", error.localizedDescription)
+                                let alert = UIAlertController(title: "Payment Error", message: error.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
+                                alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
+                                self.presentViewController(alert, animated: true, completion: nil)
+
+                            }
+                            NSLog("PAYMENT COMPLETE")
+                            self.performSegueWithIdentifier("paymentComplete", sender: self)
                     })
                 }))
                 alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: {
