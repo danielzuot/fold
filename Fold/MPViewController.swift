@@ -197,11 +197,22 @@ class MPViewController: UIViewController, CBCentralManagerDelegate, CBPeripheral
                     message: String(format: "%@%@%@%@","Sending $", self.priceReceived!, " to vendor address: ", self.vendorAddress!),
                     preferredStyle: UIAlertControllerStyle.ActionSheet
                 )
-                alert.addAction(UIAlertAction(title: "Confirm", style: UIAlertActionStyle.Default, handler: {
-                    (alert: UIAlertAction!) -> Void in
+                alert.addAction(UIAlertAction(
+                    title: "Confirm",
+                    style: UIAlertActionStyle.Default,
+                    handler: {(alert: UIAlertAction!) -> Void in
                         NSLog("Sending payment...")
-                        self.primaryAccount?.sendAmount(self.priceReceived, amountCurrencyISO: Currencies.US_DOLLARS.rawValue, to: self.vendorAddress, notes: "testing", userFee: "", referrerID: "", idem: "", instantBuy: false, orderID: "", completion: {
-                            (transaction: CoinbaseTransaction?, error: NSError?) -> Void in
+                        self.primaryAccount?.sendAmount(
+                            self.priceReceived,
+                            amountCurrencyISO: Currencies.US_DOLLARS.rawValue,
+                            to: "",
+                            notes: "testing",
+                            userFee: "",
+                            referrerID: "",
+                            idem: "",
+                            instantBuy: false,
+                            orderID: "",
+                            completion: {(transaction: CoinbaseTransaction?, error: NSError?) -> Void in
                                 if let error = error {
                                     NSLog("Payment failed %@.", error.localizedDescription)
                                     let alert = UIAlertController(title: "Payment Error", message: error.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
