@@ -13,11 +13,13 @@ import CoreBluetooth
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 let SERVICE_UUID = "E20A39F4-73F5-4BC4-A12F-17D1AD07A961"
-let CHARACTERISTIC_UUID = "08590F7E-DB05-467E-8757-72F6FAEB13D4"
+let AMOUNT_CHARACTERISTIC_UUID = "08590F7E-DB05-467E-8757-72F6FAEB13D4"
+let ADDRESS_CHARACTERISTIC_UUID = "BA4EA411-F6A6-4DB6-96B4-66D0C7250A7E"
 let NOTIFY_MTU = 20
 
 let serviceUUID = CBUUID(string: SERVICE_UUID)
-let characteristicUUID = CBUUID(string: CHARACTERISTIC_UUID)
+let amountUUID = CBUUID(string: AMOUNT_CHARACTERISTIC_UUID)
+let addressUUID = CBUUID(string: ADDRESS_CHARACTERISTIC_UUID)
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////                    OAuth                           //////////////////////////////////
@@ -35,13 +37,16 @@ let AUTH_SUCCESS_NOTIFICATION = "com.fold.app.coinbase-oauth.success"
 
 func checkForRefreshToken(){
     let userDefaults = NSUserDefaults.standardUserDefaults()
-    let expiresIn: Double? = Double(userDefaults.stringForKey("expires_in")!)
-    let startTime: Double? = Double(userDefaults.stringForKey("start_time")!)
-    let refreshToken = userDefaults.stringForKey("refresh_token")
-    let currentTime = NSDate().timeIntervalSince1970
-    if (currentTime - startTime! < expiresIn! - 300) {
-        CoinbaseOAuth.getOAuthTokensForRefreshToken(refreshToken , clientId: CLIENT_ID, clientSecret: CLIENT_SECRET, completion: { (result : AnyObject?, error: NSError?) -> Void in
-        })
+    if let expiresIn = userDefaults.stringForKey("expires_in") {
+        if let startTime = userDefaults.stringForKey("start_time") {
+            if let refreshToken = userDefaults.stringForKey("refresh_token") {
+                let currentTime = NSDate().timeIntervalSince1970
+                if (currentTime - startTime! < expiresIn! - 300) {
+                    CoinbaseOAuth.getOAuthTokensForRefreshToken(refreshToken , clientId: CLIENT_ID, clientSecret: CLIENT_SECRET, completion: { (result : AnyObject?, error: NSError?) -> Void in
+                    })
+                }
+            }
+        }
     }
 }
 

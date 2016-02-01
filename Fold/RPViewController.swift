@@ -15,12 +15,14 @@ class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextFie
     @IBOutlet private weak var broadcastingSwitch: UISwitch!
     
     private var peripheralManager: CBPeripheralManager?
-    private var transferCharacteristic: CBMutableCharacteristic?
+    private var amountCharacteristic: CBMutableCharacteristic?
+    private var addressCharacteristic: CBMutableCharacteristic?
     
     private var dataToSend: NSData?
     private var sendDataIndex: Int?
     
     private var priceToSend: String?
+    private var orderAddress: String?
    
     
     override func viewDidLoad() {
@@ -30,6 +32,13 @@ class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextFie
         // Start up the CBPeripheralManager
         peripheralManager = CBPeripheralManager(delegate: self, queue: nil)
         self.priceText.delegate = self
+        
+        // Load Coinbase client
+        checkForRefreshToken()
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        if let currentAccessToken = userDefaults.stringForKey("access_token") {
+            self.client = Coinbase(OAuthAccessToken: currentAccessToken)
+        }
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -49,7 +58,7 @@ class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextFie
             // All we advertise is our service's UUID
             peripheralManager!.startAdvertising([
                 CBAdvertisementDataServiceUUIDsKey : [serviceUUID]
-                ])
+            ])
             print("Peripheral trying to start advertising")
         } else {
             peripheralManager?.stopAdvertising()
@@ -71,8 +80,15 @@ class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextFie
         // ... so build our service.
         
         // Start with the CBMutableCharacteristic
-        transferCharacteristic = CBMutableCharacteristic(
-            type: characteristicUUID,
+        amountCharacteristic = CBMutableCharacteristic(
+            type: amountUUID,
+            properties: CBCharacteristicProperties.Notify,
+            value: nil,
+            permissions: CBAttributePermissions.Readable
+        )
+        
+        addressCharacteristic = CBMutableCharacteristic(
+            type: addressUUID,
             properties: CBCharacteristicProperties.Notify,
             value: nil,
             permissions: CBAttributePermissions.Readable
@@ -85,7 +101,7 @@ class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextFie
         )
         
         // Add the characteristic to the service
-        transferService.characteristics = [transferCharacteristic!]
+        transferService.characteristics = [addressCharacteristic!, amountCharacteristic!]
         
         // And add it to the peripheral manager
         peripheralManager!.addService(transferService)
@@ -96,8 +112,9 @@ class RPViewController: UIViewController, CBPeripheralManagerDelegate, UITextFie
     func peripheralManager(peripheral: CBPeripheralManager, central: CBCentral, didSubscribeToCharacteristic characteristic: CBCharacteristic) {
         print("Central subscribed to characteristic")
         
-        // Get the data
+        // TODO Generate an order and then get the amount and address
         priceToSend = priceText.text!
+        
         peripheralManager?.updateValue(
             (priceToSend! as NSString).dataUsingEncoding(NSUTF8StringEncoding)!,
             forCharacteristic: transferCharacteristic!,
